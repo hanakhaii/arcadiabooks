@@ -1,17 +1,17 @@
 <?php
 
 class database {
-    var $host = "localhost";
-    var $username = "root";
-    var $password = "";  
-    var $database = "library";
-    
+    public $host = "localhost";
+    public $username = "root";
+    public $password = "";  
+    public $database = "library";
+    public $conn ;
     function __construct() {
-        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
     }
 
     function register($username, $email, $password) {
-        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
         $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
     }
 }
