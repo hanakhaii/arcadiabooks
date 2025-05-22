@@ -1,21 +1,65 @@
 <?php
 
-class database {
+class database
+{
     public $host = "localhost";
     public $username = "root";
-    public $password = "";  
+    public $password = "";
     public $database = "library";
-    public $conn ; 
-    function __construct() {
+    public $conn;
+    function __construct()
+    {
         $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
     }
 
-    function register($username, $email, $password) {
-        $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+    function register($username, $email, $password, $role = 'peminjam')
+    {
+        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+
+        // Amankan input dari SQL injection
+        $username = mysqli_real_escape_string($koneksi, $username);
+        $email = mysqli_real_escape_string($koneksi, $email);
+        $password = mysqli_real_escape_string($koneksi, $password);
+        $role = mysqli_real_escape_string($koneksi, $role);
+
+
+        // Tambahkan role 'peminjam' secara default
+        $query = "INSERT INTO user (username, email, password, role) VALUES ('$username', '$email', '$password', '$role')";
+        mysqli_query($koneksi, $query);
     }
+
+    function books($keyword = '') {
+    $keyword = mysqli_real_escape_string($this->conn, $keyword);
+    if ($keyword == '') {
+        $sql = "SELECT book.title, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+                FROM book
+                JOIN writer ON book.writer_id = writer.writer_id
+                JOIN category ON book.category_id = category.category_id";
+    } else {
+        $sql = "SELECT book.title, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+                FROM book
+                JOIN writer ON book.writer_id = writer.writer_id
+                JOIN category ON book.category_id = category.category_id
+                WHERE book.title LIKE '%$keyword%' OR writer.name LIKE '%$keyword%'";
+    }
+    $data = mysqli_query($this->conn, $sql);
+    $hasil = [];
+    while ($d = mysqli_fetch_array($data)) {
+        $hasil[] = $d;
+    }
+    return $hasil;
 }
 
-$perpus = new database();
 
-?>
+    function category(){
+        $data = mysqli_query($this->conn, "SELECT * FROM category");
+        while($d = mysqli_fetch_array($data)){
+        $hasil[] = $d; 
+        }
+        return $hasil;
+        }
+}
+
+
+
+$perpus = new database();
