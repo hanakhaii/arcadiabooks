@@ -65,6 +65,7 @@
                 font-size: 13px;
                 border-radius: 3px;
                 color: white;
+                border: none;
             }
 
             form button
@@ -118,7 +119,7 @@
                 </form>
 
                 <div class="register">
-                    <p>have a account? <a href="login.html">login here</a></p>
+                    <p>have a account? <a href="login.php">login here</a></p>
                 </div>
             </div>
         </section>
