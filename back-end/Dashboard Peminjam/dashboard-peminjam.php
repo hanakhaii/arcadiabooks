@@ -34,7 +34,7 @@
         </div>
         <ul class="sidebar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="dashboard-peminjam.html">
+            <a class="nav-link" href="dashboard-peminjam.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
@@ -42,6 +42,9 @@
               </i>
             </a>
           </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="loan-time.php">
           <li class="nav-item">
             <a class="nav-link" href="loan-time.html">
               <i class="nav-icon cil-speedometer">
@@ -52,7 +55,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="history.html">
+            <a class="nav-link" href="history.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z" />
@@ -115,13 +118,15 @@
           <div class="books">
            <?php
             foreach($books as $b){
+              
 
 
 
           ?>
             <!-- for -book div -->
-            <a href="/front-end/preview-book.html" class="book">
-              <img src="../../img/30827710.jpg" alt="">
+            <div class="book">
+              <img src="../../img/<?= htmlspecialchars($b['cover']) ?>" alt="cover">
+
               <h5><?= $b['title'] ?></h5>
               <div class="container">
                 <p style="font-weight: bold;"><?= $b['category'] ?></p>
