@@ -111,13 +111,13 @@
           <h3>Popular Now</h3>
 
           <!-- books grid -->
+          <div class="books">
            <?php
             foreach($books as $b){
 
 
 
           ?>
-          <div class="books">
             <!-- for -book div -->
             <div class="book">
               <img src="../../img/30827710.jpg" alt="">
@@ -130,25 +130,24 @@
                 <p><?= $b['publication_year'] ?></p>
               </div>
             </div>
+            <?php } ?>
           </div>
         </section>
-        <?php } ?>
         <!-- all category preview -->
         <section class="all-category">
           <h3>Category</h3>
+          <!-- categories grid -->
+          <div class="categories">
         <?php
             foreach($perpus->category()as $c){
 
         ?>
-
-          <!-- categories grid -->
-          <div class="categories">
             <!-- for -category div -->
             <div class="category">
               <p><?= $c['category_name'] ?></p>
             </div>
+            <?php  }?>
           </div>
-          <?php  }?>
         </section>
       </main>
 

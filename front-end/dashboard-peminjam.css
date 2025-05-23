@@ -152,17 +152,20 @@ header {
   }
 
   .books {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    margin-left: 30px;
+    gap: 150px;
+    justify-items: center;
     margin-top: 5%;
-    max-width: max-content;
-    grid: auto;
   }
 
   .book {
     text-align: center;
     background-color: rgb(223, 248, 255);
-    padding: 20px 5px;
+    padding: 25px 15px;
     border-radius: 10px;
-    transition: 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
   }
 
   .book:hover {
@@ -176,8 +179,16 @@ header {
     margin-bottom: 10px;
   }
 
-  .book p {
-    font-size: small;
+  .book .container {
+    display: flex;
+    gap: 4px;                
+  }
+
+  .book .container p {
+    display: flex;     
+    flex-direction: row;
+    width: max-content;
+    font-size: 12px;
   }
 
 .all-category {
@@ -190,8 +201,18 @@ header {
   }
 
   .categories {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    margin-left: 30px;
+    gap: 20px;
+    justify-items: center;
     margin-top: 5%;
-    grid: auto;
+  }
+
+  .category .container {
+    display: flex; 
+    flex-direction: row;
+    gap: 4px;
   }
 
   .category p {

@@ -24,7 +24,7 @@
         }   
 
         .form-sec {
-            padding: 60px 100px 50px;
+            padding: 30px 100px;
             text-align: center;
             border-radius: 10px;
             background-color: white;
@@ -32,7 +32,7 @@
         }
 
         .form-sec h2 {
-            margin-top: 30px;
+            margin-top: 50px;
             margin-bottom: -8px;
         }
 
