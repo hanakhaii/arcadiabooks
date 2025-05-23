@@ -42,11 +42,8 @@
               </i>
             </a>
           </li>
-         
           <li class="nav-item">
             <a class="nav-link" href="loan-time.php">
-          <li class="nav-item">
-            <a class="nav-link" href="loan-time.html">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M6 2h12v6l-4 4l4 4v6H6v-6l4-4l-4-4zm10 14.5l-4-4l-4 4V20h8zm-4-5l4-4V4H8v3.5zM10 6h4v.75l-2 2l-2-2z" />
@@ -118,15 +115,10 @@
           <div class="books">
            <?php
             foreach($books as $b){
-              
-
-
-
-          ?>
+            ?>
             <!-- for -book div -->
-            <div class="book">
+            <a href="/front-end/preview-book.html" class="book">
               <img src="../../img/<?= htmlspecialchars($b['cover']) ?>" alt="cover">
-
               <h5><?= $b['title'] ?></h5>
               <div class="container">
                 <p style="font-weight: bold;"><?= $b['category'] ?></p>
@@ -145,17 +137,16 @@
           <h3>Category</h3>
           <!-- categories grid -->
           <div class="categories">
-        <?php
-            foreach($perpus->category()as $c){
-
-        ?>
+            <?php
+              foreach($perpus->category()as $c){
+            ?>
             <!-- for -category div -->
             <div class="category">
-              <a href="/front-end/kategori-buku.html"><?= $c['category_name'] ?></a>
+              <a href="/front-end/book-category.html"><?= $c['category_name'] ?></a>
+              </div>
+              <?php } ?>
             </div>
-            <?php  }?>
-          </div>
-        </section>
+          </section>
       </main>
 
       <!-- copyright -->

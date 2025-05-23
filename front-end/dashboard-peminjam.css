@@ -311,6 +311,8 @@ header {
   }
 
 footer {
+  text-decoration: none;
+  color: black;
   text-align: right;
   margin: 2%;
 }
