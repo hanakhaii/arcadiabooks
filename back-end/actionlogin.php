@@ -5,15 +5,15 @@ $db = new Database();
 $conn = $db->conn;
 
 // Ambil input dari form
-$username = $_POST['username'] ?? '';
+$email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 // Hindari SQL Injection
-$username = mysqli_real_escape_string($conn, $username);
+$email = mysqli_real_escape_string($conn, $email);
 $password = mysqli_real_escape_string($conn, $password);
 
 // Ambil data user berdasarkan username
-$query = "SELECT * FROM user WHERE username = '$username'";
+$query = "SELECT * FROM user WHERE email = '$email'";
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) > 0) {
@@ -21,14 +21,15 @@ if (mysqli_num_rows($result) > 0) {
 
     // Bandingkan password (jika disimpan dengan hash, gunakan password_verify)
     if ($user['password'] === $password) {
-        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
         $_SESSION['role'] = $user['role'];
+        $_SESSION['username'] = $user['username'];
 
         // Redirect berdasarkan role
         if ($user['role'] === 'admin') {
-            header("Location: ../front-end/dashboard-admin.html"); // dashboard admin
+            header("Location: ../front-end/dashboard_user.html"); // dashboard admin
         } else if ($user['role'] === 'peminjam') {
-            header("Location:../front-end/dashboard-pemilih.html"); // dashboard peminjam/siswa
+            header("Location: ../front-end/home.html"); // dashboard peminjam/siswa
         } else {
             echo "Role tidak dikenal.";
         }
@@ -37,7 +38,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "Password salah.";
     }
 } else {
-    echo "Username tidak ditemukan.";
+    echo "email tidak ditemukan.";
 }
 
 mysqli_close($conn);

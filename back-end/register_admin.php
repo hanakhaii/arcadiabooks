@@ -29,15 +29,15 @@
         }
 
         .form-sec {
-            padding: 60px 100px 50px;
+            padding: 20px 100px;
             text-align: center;
             border-radius: 10px;
             background-color: white;
-            transform: translate(-15%, 9%);
+            transform: translate(-10%, 9%);
         }
 
         .form-sec h2 {
-            margin-top: 30px;
+            margin-top: 50px;
             margin-bottom: -8px;
         }
 
@@ -62,11 +62,11 @@
 
         form button {
             padding: 8px;
-            margin-top: 40px;
             background-color: #9EB9C2;
             font-size: 13px;
             border-radius: 3px;
             color: white;
+            border: none;
         }
 
         form button :hover {
