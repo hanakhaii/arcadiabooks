@@ -102,7 +102,8 @@
 
         <!-- welcome to user -->
         <section class="hero">
-          <h1>Happy Reading, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
+          <h1>Happy Reading, <br>
+          <span style="color: #9BC8D7;"><?php echo htmlspecialchars($_SESSION['username']); ?></span></h1>
           <p>Lorem ipsum dolor sit amet.</p>
         </section>
 
