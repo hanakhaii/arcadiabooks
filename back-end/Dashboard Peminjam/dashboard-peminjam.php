@@ -115,13 +115,15 @@
           <div class="books">
            <?php
             foreach($books as $b){
+              
 
 
 
           ?>
             <!-- for -book div -->
             <div class="book">
-              <img src="../../img/30827710.jpg" alt="">
+              <img src="../../img/<?= htmlspecialchars($b['cover']) ?>" alt="cover">
+
               <h5><?= $b['title'] ?></h5>
               <div class="container">
                 <p style="font-weight: bold;"><?= $b['category'] ?></p>

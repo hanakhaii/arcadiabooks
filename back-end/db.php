@@ -32,12 +32,12 @@ class database
     function books($keyword = '') {
     $keyword = mysqli_real_escape_string($this->conn, $keyword);
     if ($keyword == '') {
-        $sql = "SELECT book.title, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+        $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
                 FROM book
                 JOIN writer ON book.writer_id = writer.writer_id
                 JOIN category ON book.category_id = category.category_id";
     } else {
-        $sql = "SELECT book.title, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+        $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
                 FROM book
                 JOIN writer ON book.writer_id = writer.writer_id
                 JOIN category ON book.category_id = category.category_id
