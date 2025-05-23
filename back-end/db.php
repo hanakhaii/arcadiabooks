@@ -7,6 +7,7 @@ class database
     public $password = "";
     public $database = "library";
     public $conn;
+    
     function __construct()
     {
         $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);

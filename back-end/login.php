@@ -122,7 +122,7 @@
             <div class="register">
                 <p>don't have a account? <a href="register.php">register here</a></p>
             </div>
-         </div>
+        </div>
     </section>
 </body>
 </html>

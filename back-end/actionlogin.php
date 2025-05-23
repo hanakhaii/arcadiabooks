@@ -27,9 +27,9 @@ if (mysqli_num_rows($result) > 0) {
 
         // Redirect berdasarkan role
         if ($user['role'] === 'admin') {
-            header("Location: ../back-end/Dashboard Peminjam/dashboard-peminjam.php"); // dashboard admin
+            header("Location:Dashboard Admin/dashboard_admin.php");
         } else if ($user['role'] === 'peminjam') {
-            header("Location: ../back-end/Dashboard Peminjam/dashboard-peminjam.php"); // dashboard peminjam/siswa
+            header("Location:Dashboard Peminjam/dashboard-peminjam.php");
         } else {
             echo "Role tidak dikenal.";
         }
@@ -42,4 +42,3 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($conn);
-?>
