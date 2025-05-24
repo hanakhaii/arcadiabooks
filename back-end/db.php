@@ -7,7 +7,7 @@ class database
     public $password = "";
     public $database = "library";
     public $conn;
-    
+
     function __construct()
     {
         $this->conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
@@ -29,39 +29,53 @@ class database
         mysqli_query($koneksi, $query);
     }
 
-    function books($keyword = '') {
-    $keyword = mysqli_real_escape_string($this->conn, $keyword);
-    if ($keyword == '') {
-        $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+    function books($keyword = '')
+    {
+        $keyword = mysqli_real_escape_string($this->conn, $keyword);
+        if ($keyword == '') {
+            $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
                 FROM book
                 JOIN writer ON book.writer_id = writer.writer_id
                 JOIN category ON book.category_id = category.category_id";
-    } else {
-        $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
+        } else {
+            $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
                 FROM book
                 JOIN writer ON book.writer_id = writer.writer_id
                 JOIN category ON book.category_id = category.category_id
                 WHERE book.title LIKE '%$keyword%' OR writer.name LIKE '%$keyword%'";
-    }
-    $data = mysqli_query($this->conn, $sql);
-    $hasil = [];
-    while ($d = mysqli_fetch_array($data)) {
-        $hasil[] = $d;
-    }
-    return $hasil;
-    }   
-
-
-    function category(){
-        $data = mysqli_query($this->conn, "SELECT * FROM category");
-        while($d = mysqli_fetch_array($data)){
-        $hasil[] = $d; 
+        }
+        $data = mysqli_query($this->conn, $sql);
+        $hasil = [];
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
         }
         return $hasil;
-        }
+    }
 
-    function history($email) {
-    $sql = "SELECT 
+
+    function category()
+    {
+        $data = mysqli_query($this->conn, "SELECT * FROM category");
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
+    function getWriters()
+    {
+        $data = mysqli_query($this->conn, "SELECT name FROM writer");
+        $hasil = [];
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
+
+    function history($email)
+    {
+        $sql = "SELECT 
                 book.title, 
                 book.cover, 
                 writer.name AS writer, 
@@ -76,18 +90,19 @@ class database
             JOIN writer ON book.writer_id = writer.writer_id
             JOIN category ON book.category_id = category.category_id
             WHERE loan_time.email = '$email'";
- 
-    $data = mysqli_query($this->conn, $sql);
-    $hasil = [];
-    while ($d = mysqli_fetch_array($data)) {
-        $hasil[] = $d;
-    }
-    return $hasil;
+
+        $data = mysqli_query($this->conn, $sql);
+        $hasil = [];
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
     }
 
 
-    function loantime($email) {
-    $sql = "SELECT 
+    function loantime($email)
+    {
+        $sql = "SELECT 
                 book.title, 
                 book.cover, 
                 writer.name AS writer, 
@@ -103,18 +118,19 @@ class database
             JOIN category ON book.category_id = category.category_id
             WHERE loan_time.email = '$email' 
             AND loan_time.status IN ('dipinjam', 'terlambat')";  // hanya tampilkan yang masih dipinjam atau terlambat
- 
-    $data = mysqli_query($this->conn, $sql);
-    $hasil = [];
-    while ($d = mysqli_fetch_array($data)) {
-        $hasil[] = $d;
-    }
-    return $hasil;
-}
 
+        $data = mysqli_query($this->conn, $sql);
+        $hasil = [];
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
 }
 
 
 
 $perpus = new database();
 ?>
+
+//db php

@@ -1,5 +1,13 @@
+<?php
+include '../db.php';
+$perpus = new database();
+$writers = $perpus->getWriters();
+$categories = $perpus->category();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Add Book</title>
@@ -70,31 +78,49 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="logo">YUMEBOOK</div>
         <h1>Add Book</h1>
-        <form action="proses_add_book.php" method="post" enctype="multipart/form-data">
+        <form action="../proses.php?aksi=tambah_buku" method="post" enctype="multipart/form-data">
             <label for="cover">Cover Buku :</label>
             <input type="file" id="cover" name="cover">
 
             <label for="judul">Judul Buku :</label>
             <input type="text" id="judul" name="judul" placeholder="Contoh: Tan: Sebuah Novel">
 
-            <label for="penulis">Penulis Buku :</label>
-            <select id="penulis" name="penulis">
+            <label for="writer_name">Penulis Buku :</label>
+            <select id="writer_name" name="writer_name">
                 <option value="">-- Pilih Penulis --</option>
-                <option value="Hendri Teja">Hendri Teja</option>
-                <option value="Galuh Maheswara">Galuh Maheswara</option>
-                <option value="Hana Khairunnisa">Hana Khairunnisa</option>
-                <option value="Ahmad Zulfikar">Ahmad Zulfikar</option>
+                <?php foreach ($writers as $w) : ?>
+                    <option value="<?= $w['name'] ?>"><?= $w['name'] ?></option>
+                <?php endforeach; ?>
             </select>
 
+            <label for="category_name">Kategori Buku :</label>
+            <select id="category_name" name="category_name">
+                <option value="">-- Pilih Kategori --</option>
+                <?php foreach ($categories as $c) : ?>
+                    <option value="<?= $c['category_name'] ?>"><?= $c['category_name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <label for="isbn">ISBN :</label>
+            <input type="text" id="isbn" name="isbn">
+
+            <label for="publisher">Publisher :</label>
+            <input type="text" id="publisher" name="publisher">
+
             <label for="tahun">Tahun Rilis Buku :</label>
-            <input type="number" id="tahun" name="tahun" placeholder="Contoh: 2100">
+            <input type="number" id="tahun" name="tahun" placeholder="Contoh: 2025">
+
+            <label for="copy">Jumlah Copy :</label>
+            <input type="number" id="copy" name="copy" placeholder="Contoh: 10">
 
             <button type="submit" class="btn-submit">Add Book</button>
         </form>
     </div>
 </body>
+
 </html>
