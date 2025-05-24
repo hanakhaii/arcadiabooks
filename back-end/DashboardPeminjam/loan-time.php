@@ -1,10 +1,9 @@
 <?php
  include '../db.php';
-
     session_start();
     if (!isset($_SESSION['email'] )) {
-        header("Location: ../login.php"); 
-        exit();
+      header("Location: ../login.php"); 
+      exit();
     }
 $email = $_SESSION['email']; 
 $perpus = new database();
@@ -15,10 +14,10 @@ $perpus = new database();
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcadia Book</title>
-    <link rel="stylesheet" href="../../front-end/dashboard-peminjam.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dashboard-peminjam.css">
+    <title>Arcadia Book</title>
 </head>
 <body>
     <body>

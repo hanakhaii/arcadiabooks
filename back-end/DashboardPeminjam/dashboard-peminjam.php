@@ -18,9 +18,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
-    <title>Arcadia Book</title>
-    <link rel="stylesheet" href="../../front-end/dashboard-peminjam.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/dashboard-peminjam.css">
+    <title>Arcadia Book</title>
 </head>
   <body>
       <!-- sidebar -->

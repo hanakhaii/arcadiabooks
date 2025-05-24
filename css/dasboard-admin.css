@@ -74,7 +74,7 @@ body {
     /* Style untuk footer */
     .sidebar .footer {
         margin-bottom: 20px;
-        margin-top: 120px;
+        margin-top: 80px;
     }
 
 /* Main Content Styles */
@@ -93,6 +93,10 @@ body {
     }
 
     /* untuk tampilan awal di Dashboard */
+        .main_dashboard h1 {
+            font-weight: bold;
+        }
+
         .main_dashboard header h1 span {
             color: #0066FF;
         }
@@ -121,6 +125,10 @@ body {
             padding: 15px;
         }
 
+        .as_admin  {
+            text-align: center;
+        }
+
         ul li span {
             font-weight: bolder;
         }
@@ -128,4 +136,82 @@ body {
         .footer-main {
             text-align: right;
             margin: 10px;
+        }
+        
+        .container-admin {
+            display: flex;
+            margin: 30px 10px;
+            justify-content: space-around;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .container-admin img {
+            width: 120px;
+            border-radius: 5px;
+        }
+
+        .container-admin h3 {
+            margin-bottom: -10px;
+        }
+
+        .text-container {
+            font-size: 12px;
+            gap: 4px;
+            margin: 0;
+            display: flex;
+            text-align: center;
+        }
+
+        .grid {
+            transition: margin-left 0.3s ease-in-out;
+            justify-content: center;
+            margin-top: 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .one-grid {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px 120px;
+            text-align: center;
+            margin-bottom: -10px;
+        }
+
+        .one-grid svg {
+            margin-top: 30px;
+        }
+
+        .one-grid svg, h5 {
+            margin-bottom: -20px;
+        }
+
+    table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        thead {
+            transition: 0.3s ease-in-out;
+            background-color: #63b9d6;
+            color: white;
+        }
+
+        th, td {
+            transition: 0.3s ease-in-out;
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th:hover {
+            transition: 0.3s ease-in-out;
+            background-color: rgb(139, 154, 168);
+        }
+
+        td:hover {
+            transition: 0.3s ease-in-out;
+            background-color: #ddd;
         }

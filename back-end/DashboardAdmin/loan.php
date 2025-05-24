@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="dashboard_admin.css">
+    <link rel="stylesheet" href="/css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
 
@@ -30,28 +30,28 @@
                     Dashboard
                 </li>
 
-                <li id="book">
+                <li id="books">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1zm10 0s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1z" />
                     </svg>
-                    Book
+                    Books
                 </li>
 
-                <li id="category">
+                <li id="categories">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5t1.313-3.187T17.5 13t3.188 1.313T22 17.5t-1.312 3.188T17.5 22M3 21.5v-8h8v8zM17.5 20q1.05 0 1.775-.725T20 17.5t-.725-1.775T17.5 15t-1.775.725T15 17.5t.725 1.775T17.5 20M5 19.5h4v-4H5zM10.05 9h3.9L12 5.85zm7.45 8.5" />
                     </svg>
-                    Category
+                    Categories
                 </li>
 
-                <li id="author">
+                <li id="authors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
                             <path d="M5.076 17C4.089 4.545 12.912 1.012 19.973 2.224c.286 4.128-1.734 5.673-5.58 6.387c.742.776 2.055 1.753 1.913 2.974c-.1.868-.69 1.295-1.87 2.147C11.85 15.6 8.854 16.78 5.076 17" />
                             <path d="M4 22c0-6.5 3.848-9.818 6.5-12" />
                         </g>
                     </svg>
-                    Author
+                    Authors
                 </li>
 
                 <li id="loan">
@@ -77,9 +77,31 @@
 
         <!-- main -->
         <main class="main_dashboard">
-            <center>
-                <h1>Mulai Pinjam Buku!</h1>
-            </center>
+            <h1>Loan Data</h1>
+
+            <!-- table for books list data -->
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Publication Year</th>
+                    <th>Copy</th>
+                    <th>Cover</th>
+                </thead>
+                <tbody>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Category</td>
+                    <td>ISBN</td>
+                    <td>Publisher</td>
+                    <td>Publication Year</td>
+                    <td>Copy</td>
+                    <td>Cover</td>
+                </tbody>
+            </table>
         </main>
     </section>
 
@@ -122,14 +144,14 @@
                 case 'dashboard':
                     url = 'dashboard_admin.php';
                     break;
-                case 'book':
-                    url = 'book_data.php';
+                case 'books':
+                    url = 'books_data.php';
                     break;
-                case 'category':
-                    url = 'category_data.php';
+                case 'categories':
+                    url = 'categories_data.php';
                     break;
-                case 'author':
-                    url = 'author_data.php';
+                case 'authors':
+                    url = 'authors_data.php';
                     break;
                 case 'loan':
                     url = 'loan.php';
