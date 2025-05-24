@@ -1,3 +1,7 @@
+<?php
+require_once 'C:/laragon/www/arcadiabooks/back-end/db.php';
+$perpus = new database();
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -70,14 +74,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">YUMEBOOK</div>
+        <div class="logo">ARCADIA BOOKS</div>
         <h1>Add Category</h1>
-        <form action="proses_add_category.php" method="post">
+        <form action="../../proses.php?aksi=tambah_kategori" method="post">
             <label for="nama">Category Name :</label>
             <input type="text" id="nama" name="nama" placeholder="Contoh: Ensiklopedia" required>
-
-            <label for="jumlah">Jumlah Buku :</label>
-            <input type="number" id="jumlah" name="jumlah" placeholder="Contoh: 15" required>
 
             <button type="submit" class="btn-submit">Add Category</button>
         </form>

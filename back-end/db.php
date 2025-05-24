@@ -160,6 +160,42 @@ class database
     }
 
 
+    // Tambahkan method berikut di dalam class database
+    public function createCategory($category_name)
+    {
+        $category_name = mysqli_real_escape_string($this->conn, $category_name);
+        $sql = "INSERT INTO category (category_name) VALUES ('$category_name')";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function updateCategory($id, $category_name)
+    {
+        $id = (int)$id;
+        $category_name = mysqli_real_escape_string($this->conn, $category_name);
+        $sql = "UPDATE category SET category_name = '$category_name' WHERE category_id = $id";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function deleteCategory($id)
+    {
+        $id = (int)$id;
+        // Cek apakah kategori digunakan di buku
+        $check = mysqli_query($this->conn, "SELECT * FROM book WHERE category_id = $id");
+        if (mysqli_num_rows($check) > 0) {
+            return false;
+        }
+        $sql = "DELETE FROM category WHERE category_id = $id";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function getCategoryById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT * FROM category WHERE category_id = $id";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+
 
 
     function history($email)

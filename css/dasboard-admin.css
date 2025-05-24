@@ -245,6 +245,35 @@ body {
             background-color: #61b7d33b;
         }
 
+        /* Tambahkan style untuk tombol */
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-right: 5px;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .btn-create {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            float: right;
+        }
+
         .back-btn {
             margin-bottom: 30px;
             }

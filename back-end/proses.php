@@ -64,4 +64,38 @@ if (isset($_GET['aksi'])) {
         }
         exit;
     }
+    if ($aksi == 'tambah_kategori') {
+        $category_name = $_POST['nama'];
+        $result = $perpus->createCategory($category_name);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/add_category.php?pesan=gagal");
+        }
+    }
+
+    if ($aksi == 'edit_kategori') {
+        $id = $_POST['id'];
+        $category_name = $_POST['nama'];
+
+        $result = $perpus->updateCategory($id, $category_name);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=update_sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/edit_category.php?id=$id&pesan=update_gagal");
+        }
+    }
+
+    if ($aksi == 'hapus_kategori') {
+        $id = $_GET['id'];
+        $result = $perpus->deleteCategory($id);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_gagal&error=used");
+        }
+    }
 }

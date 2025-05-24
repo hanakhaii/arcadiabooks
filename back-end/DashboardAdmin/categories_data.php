@@ -1,3 +1,8 @@
+<?php
+require_once 'C:/laragon/www/arcadiabooks/back-end/db.php';
+$perpus = new database();
+$categories = $perpus->category();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,27 +91,30 @@
         <main class="main_dashboard">
             <h1>Categories Data</h1>
 
+            <a href="add_category.php" class="btn-create">Create New Category</a>
+
             <!-- table for categories list data -->
             <table>
                 <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>ISBN</th>
-                    <th>Publisher</th>
-                    <th>Publication Year</th>
-                    <th>Copy</th>
-                    <th>Cover</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category Name</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>ISBN</td>
-                    <td>Publisher</td>
-                    <td>Publication Year</td>
-                    <td>Copy</td>
-                    <td>Cover</td>
+                    <?php foreach ($categories as $cat): ?>
+                        <tr>
+                            <td><?= $cat['category_id'] ?></td>
+                            <td><?= $cat['category_name'] ?></td>
+                            <td>
+                                <a href="edit_category.php?id=<?= $cat['category_id'] ?>" class="btn-edit">Edit</a>
+                                <a href="../../proses.php?aksi=hapus_kategori&id=<?= $cat['category_id'] ?>"
+                                    class="btn-delete"
+                                    onclick="return confirm('Yakin hapus kategori?')">Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>
