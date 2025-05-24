@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 class database
 {
     public $host = "localhost";
@@ -61,10 +62,11 @@ class database
         }
         return $hasil;
     }
-    
-    function booksByCategory($categoryId) {
-    $categoryId = (int)$categoryId;
-    $sql = "SELECT 
+
+    function booksByCategory($categoryId)
+    {
+        $categoryId = (int)$categoryId;
+        $sql = "SELECT 
                 book.title, 
                 book.cover, 
                 writer.name AS writer, 
@@ -74,14 +76,14 @@ class database
             JOIN writer   ON book.writer_id   = writer.writer_id
             JOIN category ON book.category_id = category.category_id
             WHERE book.category_id = $categoryId";
-    
-    $res = mysqli_query($this->conn, $sql);
-    $out = [];
-    while ($row = mysqli_fetch_assoc($res)) {
-        $out[] = $row;
+
+        $res = mysqli_query($this->conn, $sql);
+        $out = [];
+        while ($row = mysqli_fetch_assoc($res)) {
+            $out[] = $row;
+        }
+        return $out;
     }
-    return $out;
-}
 
 
     function getWriters()
@@ -93,6 +95,71 @@ class database
         }
         return $hasil;
     }
+
+    // Ambil semua buku dengan detail lengkap
+    function getAllBooks()
+    {
+        $sql = "SELECT book.*, writer.name AS writer_name, category.category_name 
+            FROM book 
+            JOIN writer ON book.writer_id = writer.writer_id 
+            JOIN category ON book.category_id = category.category_id";
+        $data = mysqli_query($this->conn, $sql);
+        $hasil = [];
+        while ($d = mysqli_fetch_assoc($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
+    // Ambil detail buku berdasarkan ID
+    function getBookById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT * FROM book WHERE book_id = $id";
+        $data = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($data);
+    }
+
+    // Update buku
+    function updateBook($id, $data, $cover = null)
+    {
+        $id = (int)$id;
+        $judul = mysqli_real_escape_string($this->conn, $data['judul']);
+        $isbn = mysqli_real_escape_string($this->conn, $data['isbn']);
+        $publisher = mysqli_real_escape_string($this->conn, $data['publisher']);
+        $tahun = (int)$data['tahun'];
+        $copy = (int)$data['copy'];
+
+        $coverQuery = $cover ? ", cover = '$cover'" : "";
+
+        $sql = "UPDATE book SET 
+                title = '$judul', 
+                isbn = '$isbn', 
+                publisher = '$publisher', 
+                publication_year = $tahun, 
+                copy = $copy
+                $coverQuery
+            WHERE book_id = $id";
+
+        return mysqli_query($this->conn, $sql);
+    }
+
+    function deleteBook($id)
+    {
+        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+
+        // Cek apakah buku sedang atau pernah dipinjam
+        $cek = mysqli_query($conn, "SELECT * FROM loan_time WHERE book_id = $id");
+        if (mysqli_num_rows($cek) > 0) {
+            return false; // Buku tidak bisa dihapus karena masih punya relasi
+        }
+
+        // Jika tidak ada relasi, lanjut hapus
+        $result = mysqli_query($conn, "DELETE FROM book WHERE book_id = $id");
+        return $result;
+    }
+
+
 
 
     function history($email)
@@ -150,7 +217,4 @@ class database
     }
 }
 
-
-
 $perpus = new database();
-?>

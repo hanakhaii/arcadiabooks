@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'db.php';
 $perpus = new database();
 
@@ -37,7 +39,29 @@ if (isset($_GET['aksi'])) {
             echo "Gagal upload cover buku.";
         }
     }
+    if ($aksi == 'edit_buku') {
+        $id = $_GET['id'];
+        $cover = null;
+
+        if ($_FILES['cover']['name'] != '') {
+            $cover = $_FILES['cover']['name'];
+            $tmp = $_FILES['cover']['tmp_name'];
+            move_uploaded_file($tmp, "uploads/" . $cover);
+        }
+
+        $perpus->updateBook($id, $_POST, $cover);
+        header("Location: ../back-end/dashboardadmin/books_data.php?pesan=update");
+    }
+
+    if (isset($_GET['hapus_buku'])) {
+        $book_id = $_GET['delete_book'];
+        $hapus = $db->deleteBook($book_id);
+
+        if ($hapus) {
+            header("Location: dashboardadmin/books_data.php?pesan=berhasil_hapus");
+        } else {
+            header("Location: dashboardadmin/books_data.php?pesan=gagal_hapus_dipinjam");
+        }
+        exit;
+    }
 }
-
-
-//proses php
