@@ -215,3 +215,49 @@ body {
             transition: 0.3s ease-in-out;
             background-color: #ddd;
         }
+    
+    .loan-data {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 40px;
+        background-color: #E3F8FF;
+        padding: 20px 5px;
+        border-radius: 10px;
+    }
+
+        .text-loan {
+            margin-left: -150px;
+        }
+
+        .loan-data a {
+            background-color: #2686A6;
+        }
+
+        .loan-data img {
+            width: 120px;
+            border-radius: 10px;
+        }
+
+        .user-books {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #61b7d33b;
+        }
+
+        .back-btn {
+            margin-bottom: 30px;
+            }
+
+            .navigation {
+                text-decoration: none;
+                color: #2686A6;
+                transition: 0.3s ease-in-out;
+            }
+
+            .navigation:hover {
+                transition: 0.3s ease-in-out;
+                background-color: #e1ecf0;
+                padding: 10px;
+                border-radius: 5px;
+            }

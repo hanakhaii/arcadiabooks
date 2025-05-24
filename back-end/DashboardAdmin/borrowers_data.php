@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link rel="stylesheet" href="/css/dasboard-admin.css">
-    <title>Dashboard Arcadia Book</title>
+    <title>Document</title>
 </head>
-
 <body>
-    <section class="container">
+        <section class="container">
         <!-- sidebar -->
         <aside class="sidebar">
             <!-- logo & overlay sidebar -->
@@ -82,76 +80,35 @@
             </ul>
         </aside>
 
-        <!-- content -->
+        <!-- main -->
         <main class="main_dashboard">
-            <!-- header, sapaan awal untuk Admin -->
-            <header>
-                <h1>Hello <span style="color: #2686A6;">Admin</span>,</h1>
-                <h3>Welcome to Dashboard!</h3>
-                <p style="color: #0f5065;">To get started, please select the menu on the left side.</p>
-            </header>
+            <h1>Borrowers Data</h1>
 
-            <section class="opening">
-                
-            </section>
-
-            <!-- section panduan Admin -->
-            <section class="as_admin">
-                <h2>Top #3 Most Frequently Borrowed Book</h2>
-                <div class="container-admin">
-                    <div style="margin-top: 10px;">
-                        <h2>#2</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                    <div style="margin-top: -30px;">
-                        <h2>#1</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <h2>#3</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="grid">
-                <div class="one-grid">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
-                        <path fill="none" stroke="#2686A6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1zm10 0s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1z" />
-                    </svg>
-                    <h5>Total Books</h5>
-                    <h1>250</h1>
-                </div>
-                <div class="one-grid">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
-                        <path fill="none" stroke="#2686A6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
-                    </svg>
-                    <h5>Active Users</h5>
-                    <h1>50</h1>
-                </div>
-            </section>
+            <!-- table for books list data -->
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Publication Year</th>
+                    <th>Copy</th>
+                    <th>Cover</th>
+                </thead>
+                <tbody>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Category</td>
+                    <td>ISBN</td>
+                    <td>Publisher</td>
+                    <td>Publication Year</td>
+                    <td>Copy</td>
+                    <td>Cover</td>
+                </tbody>
+            </table>
         </main>
     </section>
-
-    <div class="footer-main">&copy; 2025, Yumebook. All rights reserved.</div>
 
     <!-- javascript -->
     <script>
@@ -195,7 +152,7 @@
                 case 'books':
                     url = 'books_data.php';
                     break;
-                case 'category':
+                case 'categories':
                     url = 'categories_data.php';
                     break;
                 case 'authors':
@@ -224,5 +181,4 @@
         });
     </script>
 </body>
-
 </html>

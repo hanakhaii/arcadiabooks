@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +8,8 @@
     <link rel="stylesheet" href="/css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
-
 <body>
-    <section class="container">
+        <section class="container">
         <!-- sidebar -->
         <aside class="sidebar">
             <!-- logo & overlay sidebar -->
@@ -58,7 +56,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
                     </svg>
-                    Borrowers
+                    Borrower
                 </li>
 
                 <li id="loan">
@@ -82,76 +80,51 @@
             </ul>
         </aside>
 
-        <!-- content -->
+        <!-- main -->
         <main class="main_dashboard">
-            <!-- header, sapaan awal untuk Admin -->
-            <header>
-                <h1>Hello <span style="color: #2686A6;">Admin</span>,</h1>
-                <h3>Welcome to Dashboard!</h3>
-                <p style="color: #0f5065;">To get started, please select the menu on the left side.</p>
-            </header>
-
-            <section class="opening">
-                
+            <!-- navigation -->
+            <section class="back-btn">
+                <a href="/back-end/DashboardAdmin/users_data.php" class="navigation">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="m4 10l-.707.707L2.586 10l.707-.707zm17 8a1 1 0 1 1-2 0zM8.293 15.707l-5-5l1.414-1.414l5 5zm-5-6.414l5-5l1.414 1.414l-5 5zM4 9h10v2H4zm17 7v2h-2v-2zm-7-7a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5z" />
+                    </svg>
+                    Dashboard
+                </a>
             </section>
 
-            <!-- section panduan Admin -->
-            <section class="as_admin">
-                <h2>Top #3 Most Frequently Borrowed Book</h2>
-                <div class="container-admin">
-                    <div style="margin-top: 10px;">
-                        <h2>#2</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                    <div style="margin-top: -30px;">
-                        <h2>#1</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <h2>#3</h2>
-                        <img src="/img/30827710.jpg" alt="" srcset="">
-                        <h3>Matahari</h3>
-                        <div class="text-container">
-                            <p>Matahari</p>
-                            <p>oleh</p>
-                            <p>Tere Liye</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <h1>Loan Report <span style="color: #2686A6;">User 1</span></h1>
 
-            <section class="grid">
-                <div class="one-grid">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
-                        <path fill="none" stroke="#2686A6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1zm10 0s1.5-2 5-2s5 2 5 2v14s-1.5-1-5-1s-5 1-5 1z" />
-                    </svg>
-                    <h5>Total Books</h5>
-                    <h1>250</h1>
+            <!-- for a list of books borrowed by users -->
+            <section class="user-books">
+                <div class="loan-data">
+                    <img src="/img/30827710.jpg" alt="">
+                    <div class="text-loan">
+                        <p><b>Peminjam: 
+                            User 1
+                        </b></p>
+                        <p>Tanggal Peminjaman : </p>
+                        <p>Tanggal Pengembalian : </p>
+
+                        <!-- plis tambahin kondisi, if status = sudah dikembalikan = color (green), else belum dikembalikan (color: red), -->
+                        <p>Status : Sudah Dikembalikan</p>
+                    </div>
                 </div>
-                <div class="one-grid">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24">
-                        <path fill="none" stroke="#2686A6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
-                    </svg>
-                    <h5>Active Users</h5>
-                    <h1>50</h1>
+                <div class="loan-data">
+                    <img src="/img/30827710.jpg" alt="">
+                    <div class="text-loan">
+                        <p><b>Peminjam: 
+                            User 2
+                        </b></p>
+                        <p>Tanggal Peminjaman : </p>
+                        <p>Tanggal Pengembalian : </p>
+    
+                        <!-- plis tambahin kondisi, if status = sudah dikembalikan = color (green), else belum dikembalikan (color: red), -->
+                        <p>Status : Belum Dikembalikan</p>
+                    </div>
                 </div>
             </section>
         </main>
     </section>
-
-    <div class="footer-main">&copy; 2025, Yumebook. All rights reserved.</div>
 
     <!-- javascript -->
     <script>
@@ -195,7 +168,7 @@
                 case 'books':
                     url = 'books_data.php';
                     break;
-                case 'category':
+                case 'categories':
                     url = 'categories_data.php';
                     break;
                 case 'authors':
@@ -224,5 +197,5 @@
         });
     </script>
 </body>
-
+</body>
 </html>
