@@ -164,6 +164,8 @@ header {
     text-align: center;
     background-color: rgb(223, 248, 255);
     padding: 25px 15px;
+    text-decoration: none;
+    color: black;
     border-radius: 10px;
     transition: box-shadow 0.3s ease-in-out;
   }
@@ -215,9 +217,12 @@ header {
     gap: 4px;
   }
 
-  .category p {
+  .category a {
+    cursor: pointer;
     padding: 8px;
     width: fit-content;
+    text-decoration: none;
+    color: black;
     border-radius: 18px;
     font-size: 13px;
     font-weight: 500;
@@ -225,7 +230,7 @@ header {
     transition: 0.3s ease-in-out;
   }
 
-  .category p:hover {
+  .category a:hover {
     transition: 0.3s ease-in-out;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
@@ -264,7 +269,50 @@ header {
     margin: 65px 0px;
   }
 
+.back-btn {
+  margin-top: 30px;
+}
+
+  .navigation {
+    text-decoration: none;
+    color: #2686A6;
+    transition: 0.3s ease-in-out;
+  }
+
+  .navigation:hover {
+    transition: 0.3s ease-in-out;
+    background-color: #e1ecf0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+.description {
+    margin: 40px 20px;
+}
+
+  .description h2 {
+    margin-bottom: 20px;
+  }
+
+  .description button {
+    margin-top: 50px;
+    padding: 10px 80px;
+    cursor: pointer;
+    color: white;
+    background-color: #2686A6;
+    border-radius: 5px;
+    border: transparent;
+    transition: 0.3s ease-in-out;
+  }
+
+  .description button:hover {
+    transition: 0.3 ease-in-out;
+    background-color: #2686a6b1;
+  }
+
 footer {
+  text-decoration: none;
+  color: black;
   text-align: right;
   margin: 2%;
 }

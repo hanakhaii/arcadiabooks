@@ -34,7 +34,7 @@
         </div>
         <ul class="sidebar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="dashboard-peminjam.html">
+            <a class="nav-link" href="dashboard-peminjam.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
@@ -43,16 +43,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="saved-book.html">
-              <i class="nav-icon cil-speedometer">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path fill="#fff" d="M6 22q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .825-.587 1.413T18 22zm0-2h12V4h-2v7l-2.5-1.5L11 11V4H6zm0 0V4zm5-9l2.5-1.5L16 11l-2.5-1.5z" />
-                  </svg>
-              </i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="loan-time.html">
+            <a class="nav-link" href="loan-time.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M6 2h12v6l-4 4l4 4v6H6v-6l4-4l-4-4zm10 14.5l-4-4l-4 4V20h8zm-4-5l4-4V4H8v3.5zM10 6h4v.75l-2 2l-2-2z" />
@@ -61,10 +52,19 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="history.html">
+            <a class="nav-link" href="history.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                       <path fill="#fff" d="M12 21q-3.45 0-6.012-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m2.8-4.8L11 12.4V7h2v4.6l3.2 3.2z" />
+                  </svg>
+              </i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="alert('apakah anda yakin ingin logout?')">
+              <i class="nav-icon cil-speedometer">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
                   </svg>
               </i>
             </a>
@@ -104,7 +104,7 @@
         <section class="hero">
           <h1>Happy Reading, <br>
           <span style="color: #9BC8D7;"><?php echo htmlspecialchars($_SESSION['username']); ?></span></h1>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>Every page is like stepping into a new world!</p>
         </section>
 
         <!-- all books preview -->
@@ -115,15 +115,10 @@
           <div class="books">
            <?php
             foreach($books as $b){
-              
-
-
-
-          ?>
+            ?>
             <!-- for -book div -->
-            <div class="book">
+            <a href="/front-end/preview-book.html" class="book">
               <img src="../../img/<?= htmlspecialchars($b['cover']) ?>" alt="cover">
-
               <h5><?= $b['title'] ?></h5>
               <div class="container">
                 <p style="font-weight: bold;"><?= $b['category'] ?></p>
@@ -132,26 +127,26 @@
                 <p> • </p>
                 <p><?= $b['publication_year'] ?></p>
               </div>
-            </div>
+            </a>
             <?php } ?>
           </div>
         </section>
+
         <!-- all category preview -->
         <section class="all-category">
           <h3>Category</h3>
           <!-- categories grid -->
           <div class="categories">
-        <?php
-            foreach($perpus->category()as $c){
-
-        ?>
+            <?php
+              foreach($perpus->category()as $c){
+            ?>
             <!-- for -category div -->
             <div class="category">
-              <p><?= $c['category_name'] ?></p>
+              <a href="/front-end/book-category.html"><?= $c['category_name'] ?></a>
+              </div>
+              <?php } ?>
             </div>
-            <?php  }?>
-          </div>
-        </section>
+          </section>
       </main>
 
       <!-- copyright -->
