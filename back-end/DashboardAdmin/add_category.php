@@ -1,5 +1,5 @@
 <?php
-require_once 'C:/laragon/www/arcadiabooks/back-end/db.php';
+require_once '../db.php';
 $perpus = new database();
 ?>
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ $perpus = new database();
     <div class="container">
         <div class="logo">ARCADIA BOOKS</div>
         <h1>Add Category</h1>
-        <form action="../../proses.php?aksi=tambah_kategori" method="post">
+        <form action="../proses.php?aksi=tambah_kategori" method="post">
             <label for="nama">Category Name :</label>
             <input type="text" id="nama" name="nama" placeholder="Contoh: Ensiklopedia" required>
 

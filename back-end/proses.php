@@ -58,9 +58,9 @@ if (isset($_GET['aksi'])) {
         $hapus = $db->deleteBook($book_id);
 
         if ($hapus) {
-            header("Location: dashboardadmin/books_data.php?pesan=berhasil_hapus");
+            header("Location: ../back-end/dashboardadmin/books_data.php?pesan=berhasil_hapus");
         } else {
-            header("Location: dashboardadmin/books_data.php?pesan=gagal_hapus_dipinjam");
+            header("Location: ../back-end/dashboardadmin/books_data.php?pesan=gagal_hapus_dipinjam");
         }
         exit;
     }

@@ -109,7 +109,7 @@ $categories = $perpus->category();
                             <td><?= $cat['category_name'] ?></td>
                             <td>
                                 <a href="edit_category.php?id=<?= $cat['category_id'] ?>" class="btn-edit">Edit</a>
-                                <a href="../../proses.php?aksi=hapus_kategori&id=<?= $cat['category_id'] ?>"
+                                <a href="../proses.php?aksi=hapus_kategori&id=<?= $cat['category_id'] ?>"
                                     class="btn-delete"
                                     onclick="return confirm('Yakin hapus kategori?')">Delete</a>
                             </td>
