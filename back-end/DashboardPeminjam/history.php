@@ -1,13 +1,8 @@
 <?php
- include '../db.php';
-
-    session_start();
-    if (!isset($_SESSION['email'] )) {
-        header("Location: ../login.php"); 
-        exit();
-    }
-$email = $_SESSION['email']; 
-$perpus = new database();
+include '../db.php';
+include '../session.php';
+    $email = $_SESSION['email']; 
+    $perpus = new database();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +11,10 @@ $perpus = new database();
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/dashboard-peminjam.css">
+    <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
     <title>Arcadia Book</title>
 </head>
+
 <body>
     <body>
           <!-- sidebar -->
@@ -60,7 +56,7 @@ $perpus = new database();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" onclick="alert('apakah anda yakin ingin logout?')">
+            <a class="nav-link"href="../logout.php">
               <i class="nav-icon cil-speedometer">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
@@ -114,7 +110,7 @@ $perpus = new database();
               <div class="books-coulum">
                 <!-- for -book div -->
                 <div class="book-container">
-                  <img src="../../img/<?= htmlspecialchars($l['cover']) ?>" alt="cover">
+                  <img src="../../back-end/uploads/<?= htmlspecialchars($l['cover']) ?>" alt="cover">
                   <div class="time-detail">
                     <h3><?= $l['title'] ?></h3>
                     <div class="book-container">

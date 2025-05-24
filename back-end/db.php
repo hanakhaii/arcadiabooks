@@ -61,6 +61,28 @@ class database
         }
         return $hasil;
     }
+    
+    function booksByCategory($categoryId) {
+    $categoryId = (int)$categoryId;
+    $sql = "SELECT 
+                book.title, 
+                book.cover, 
+                writer.name AS writer, 
+                book.publication_year, 
+                category.category_name 
+            FROM book
+            JOIN writer   ON book.writer_id   = writer.writer_id
+            JOIN category ON book.category_id = category.category_id
+            WHERE book.category_id = $categoryId";
+    
+    $res = mysqli_query($this->conn, $sql);
+    $out = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        $out[] = $row;
+    }
+    return $out;
+}
+
 
     function getWriters()
     {
@@ -132,5 +154,3 @@ class database
 
 $perpus = new database();
 ?>
-
-//db php

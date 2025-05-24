@@ -1,9 +1,25 @@
 <?php
-  include '../db.php';
-  include '../session.php';
-  $keyword = isset($_GET['search']) ? trim($_GET['search']) : '';
-  $books = $perpus->books($keyword);
+include '../db.php';
+session_start();
+// cek login jika perlu…
 
+if (!isset($_GET['category_id'])) {
+    header('Location: dashboard-peminjam.php');
+    exit;
+}
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+
+$catId = (int)$_GET['category_id'];
+// 1) Ambil nama kategorinya biar bisa ditampilkan di judul
+$catRes = mysqli_query($perpus->conn, 
+    "SELECT category_name FROM category WHERE category_id = $catId");
+$catRow = mysqli_fetch_assoc($catRes);
+$catName = $catRow['category_name'] ?? 'Unknown';
+
+$books = $perpus->booksByCategory($catId);
 ?>
 
 <!DOCTYPE html>
@@ -12,10 +28,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
-    <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
     <title>Arcadia Book</title>
+    <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
 </head>
+
   <body>
       <!-- sidebar -->
       <sidebar class="sidebar sidebar-narrow border-end" style="height: 100vh; position: fixed; background-color: #9BC8D7; top: 0;">
@@ -72,19 +89,6 @@
         <header>
           <!-- watermark -->
           <h5>Arcadia Book</h5>
-          
-          <!-- search input -->
-          <div class="search">
-            <form action="" method="get">
-              <input type="text" name="search" placeholder=" search book name or author" value="<?= htmlspecialchars($keyword) ?>" style="border-right: white;">
-              <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14" />
-                </svg>
-              </button>
-            </form>
-          </div>
-
           <!-- account icon -->
           <div class="account-icn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="translate: -50% -50%">
@@ -96,53 +100,31 @@
 
         <!-- welcome to user -->
         <section class="hero">
-          <h1>Happy Reading, <br>
-          <span style="color: #9BC8D7;"><?php echo htmlspecialchars($_SESSION['username']); ?></span></h1>
+          <h1><?= htmlspecialchars($catName) ?></h1>
           <p>Every page is like stepping into a new world!</p>
         </section>
 
         <!-- all books preview -->
         <section class="all-books">
-          <h3>Popular Now</h3>
-
           <!-- books grid -->
           <div class="books">
-           <?php
-            foreach($books as $b){
-            ?>
+            <?php foreach($books as $b): ?> 
             <!-- for -book div -->
-            <a href="/front-end/preview-book.html" class="book">
-              <img src="../../back-end/uploads/<?= htmlspecialchars($b['cover']) ?>" alt="cover">
-              <h5><?= $b['title'] ?></h5>
+            <div class="book">
+              <img src="../../back-end/uploads/<?= htmlspecialchars($b['cover'] ?? 'default.jpg') ?>"
+               alt="cover">
+              <h5><?= $b['title']?></h5>
               <div class="container">
-                <p style="font-weight: bold;"><?= $b['category'] ?></p>
+                <p style="font-weight: bold;"><?= $b['category_name']?></p>
                 <p>oleh</p>
-                <p style="font-weight: bold;"><?= $b['writer'] ?></p>
+                <p style="font-weight: bold;"><?= $b['writer']?></p>
                 <p> • </p>
-                <p><?= $b['publication_year'] ?></p>
+                <p>2016</p>
               </div>
-            </a>
-            <?php } ?>
+            </div>
+             <?php endforeach; ?>
           </div>
         </section>
-
-        <!-- all category preview -->
-        <section class="all-category">
-          <h3>Category</h3>
-          <!-- categories grid -->
-          <div class="categories">
-            <?php
-              foreach($perpus->category()as $c){
-            ?>
-            <!-- for -category div -->
-            <div class="category">
-              <a href="book-category.php?category_id=<?= $c['category_id'] ?>">
-                <?= htmlspecialchars($c['category_name']) ?>
-              </a>
-              </div>
-              <?php } ?>
-            </div>
-          </section>
       </main>
 
       <!-- copyright -->

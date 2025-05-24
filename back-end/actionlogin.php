@@ -27,9 +27,9 @@ if (mysqli_num_rows($result) > 0) {
 
         // Redirect berdasarkan role
         if ($user['role'] === 'admin') {
-            header("Location:Dashboard Admin/dashboard_admin.php");
+            header("Location:DashboardAdmin/dashboard_admin.php");
         } else if ($user['role'] === 'peminjam') {
-            header("Location:Dashboard Peminjam/dashboard-peminjam.php");
+            header("Location:DashboardPeminjam/dashboard-peminjam.php");
         } else {
             echo "Role tidak dikenal.";
         }
