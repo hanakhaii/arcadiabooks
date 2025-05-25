@@ -3,6 +3,8 @@ include '../db.php';
 include '../session.php';
     $email = $_SESSION['email']; 
     $perpus = new database();
+    $history = $perpus->loantime($email);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +96,7 @@ include '../session.php';
               <!-- books column -->
 
                 <?php
-                foreach($perpus->history($email) as $l){
+                foreach($history as $l){
                     $status = $l['status'];
                     $warna = '';
 

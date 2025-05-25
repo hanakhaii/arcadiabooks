@@ -1,3 +1,18 @@
+<?php
+include "../db.php";
+$db = new database();
+
+// Ambil semua data buku + penulis
+$query = "SELECT book.title, book.isbn, book.cover, writer.name AS writer_name 
+          FROM book
+          LEFT JOIN writer ON book.writer_id = writer.writer_id ";
+
+$result = mysqli_query($db->conn, $query);
+// Query untuk ambil semua email user
+$email_result = mysqli_query($db->conn, "SELECT email FROM user WHERE role = 'peminjam'");
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -81,29 +96,55 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">YUMEBOOK</div>
+        <div class="logo">ARCADIA BOOKS</div>
         <h1>Add Loan Data</h1>
 
         <form action="proses_add_loan.php" method="post" enctype="multipart/form-data">
             <label for="cover">Cover Buku :</label>
-            <input type="file" id="cover" name="cover" accept="image/*">
-            <img src="" alt="Preview Cover" class="cover-preview">
+            <img id="book_cover" src="" alt="Preview Cover" class="cover-preview">
 
-            <label for="book">Nama Buku :</label>
-            <select id="book" name="book" required>
-                <option value="VFCFVZDGSERDBF">Tan : Sebuah Novel</option>
-                <option value="BFXDHXDFJGKHXTJD">BFXDHXDFJGKHXTJD</option>
+           <label for="book">Nama Buku :</label>
+            <select id="list_book" name="title" required>
+                <option value="">-- Pilih Buku --</option>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <option 
+                        value="<?= htmlspecialchars($row['title']); ?>" 
+                        data-writer="<?= htmlspecialchars($row['writer_name']); ?>" 
+                        data-isbn="<?= htmlspecialchars($row['isbn']); ?>" 
+                        data-cover="<?= htmlspecialchars($row['cover']); ?>">
+                        <?= htmlspecialchars($row['title']); ?>
+                    </option>
+                <?php endwhile; ?>
             </select>
+
+
+
 
             <label for="email">Email :</label>
-            <input type="email" id="email" name="email" value="a@.com" required>
+            <select id="email" name="email" required>
+                <option value="">-- Pilih Email --</option>
+                <?php while ($email_row = mysqli_fetch_assoc($email_result)) : ?>
+                    <option value="<?= htmlspecialchars($email_row['email']) ?>">
+                        <?= htmlspecialchars($email_row['email']) ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
+
 
             <label for="author">Author :</label>
-            <select id="author" name="author" required>
-                <option value="Hendri Teja">Hendri Teja</option>
-                <option value="VFCFVZDGSERDBF">VFCFVZDGSERDBF</option>
-                <option value="BFXDHXDFJGKHXTJD">BFXDHXDFJGKHXTJD</option>
-            </select>
+            <input type="text" class="form-control" id="writer" name="writer" readonly>
+
+             <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="isbn" name="isbn" readonly>
+            
+            <label for="loan_date">Tanggal Peminjaman :</label>
+            <input type="date" id="loan_date" name="loan_date"  required>
+
+            <label for="estimated_return_date">Perkiraan Tanggal Pengembalian :</label>
+           <input type="date" id="estimated_return_date" name="estimated_return_date" readonly>
+<!-- 
+            <label for="return_date">Tanggal Pengembalian:</label> -->
+            <input type="hidden" id="return_date" name="return_date">
 
             <label for="status">Status Peminjaman :</label>
             <select id="status" name="status" required>
@@ -115,5 +156,43 @@
             <button type="submit" class="btn-submit">Add Loan Data</button>
         </form>
     </div>
+<script>
+document.getElementById("list_book").addEventListener("change", function () {
+    const selected = this.options[this.selectedIndex];
+    const writer = selected.getAttribute("data-writer");
+    const isbn = selected.getAttribute("data-isbn");
+    const cover = selected.getAttribute("data-cover");
+
+    document.getElementById("writer").value = writer || "";
+    document.getElementById("isbn").value = isbn || "";
+
+    if (cover) {
+        document.getElementById("book_cover").src = "../uploads/" + cover;
+    } else {
+        document.getElementById("book_cover").src = "";
+    }
+});
+// ketika loan di isi akan otomatis estimasinya 7 hari 
+document.getElementById('loan_date').addEventListener('change', function() {
+    const loanDate = this.value;
+    if (loanDate) {
+        const date = new Date(loanDate);
+        date.setDate(date.getDate() + 7); // tambah 7 hari
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        const estimatedReturn = `${year}-${month}-${day}`;
+        document.getElementById('estimated_return_date').value = estimatedReturn;
+    } else {
+        document.getElementById('estimated_return_date').value = '';
+    }
+});
+
+</script>
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            
+
 </body>
 </html>

@@ -97,4 +97,13 @@ if (isset($_GET['aksi'])) {
             header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_gagal&error=used");
         }
     }
+    if ($aksi == 'deleteloan') {
+        $id = $_GET['loan_id'];
+        $result = $perpus->deleteLoanTime($id);
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/loan.php?pesan=hapus_sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/loan.php?pesan=hapus_gagal&error=used");
+        }
+    }
 }

@@ -1,13 +1,15 @@
 <?php
 include "../db.php";
 include "../session.php";
-
+$perpus = new database;
+$dataPinjam = $perpus->loantime(); // tidak kirim email → tampil semua
 
 
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <head>
     <meta charset="UTF-8">
@@ -101,25 +103,40 @@ include "../session.php";
             <!-- table for books list data -->
             <table>
                 <thead>
-                    <th>ID</th>
+                    <th>No</th>
                     <th>Title</th>
-                    <th>Category</th>
+                    <th>Email</th>
+                    <th>Author</th>
                     <th>ISBN</th>
-                    <th>Publisher</th>
-                    <th>Publication Year</th>
-                    <th>Copy</th>
-                    <th>Cover</th>
+                    <th>Loan Date</th>
+                    <th>Estimated Return Date</th>
+                    <th>Return Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </thead>
                 <tbody>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>ISBN</td>
-                    <td>Publisher</td>
-                    <td>Publication Year</td>
-                    <td>Copy</td>
-                    <td>Cover</td>
+                <?php
+                $no = 1;
+                foreach($dataPinjam as $l){
+                ?>
+                    <td><?= $no++; ?></td>
+                    <td><?= $l['title'] ?></td>
+                    <td><?= $l['email'] ?></td>
+                    <td><?= $l['writer'] ?></td>
+                    <td><?= $l['isbn'] ?></td>
+                    <td><?= $l['loan_date'] ?></td>
+                    <td><?= $l['estimated_return_date'] ?></td>
+                    <td><?= $l['return_date'] ?></td>
+                    <td><?= $l['status'] ?></td>
+                    <td>
+                        <a href="edit_loan.php?loan_id=<?= $l['loan_id'] ?>" class="btn-edit">Edit</a>
+
+                        <a href="../proses.php?loan_id=<?= $l['loan_id'] ?>&aksi=deleteloan" onclick="return confirm('Apakah Anda yakin ingin menghapus data peminjaman ini?')" class="btn-delete">Delete</a>
+
+                    </td>
+                    
                 </tbody>
+                <?php  } ?>
             </table>
         </main>
     </section>

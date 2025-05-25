@@ -223,25 +223,33 @@ class database
         return $hasil;
     }
 
-
-    function loantime($email)
+    function loantime($email = null)
     {
         $sql = "SELECT 
-                book.title, 
-                book.cover, 
-                writer.name AS writer, 
-                category.category_name AS category_name, 
-                book.publication_year, 
-                loan_time.loan_date, 
-                loan_time.return_date, 
-                loan_time.estimated_return_date,
-                loan_time.status
-            FROM loan_time
-            JOIN book ON loan_time.book_id = book.book_id
-            JOIN writer ON book.writer_id = writer.writer_id
-            JOIN category ON book.category_id = category.category_id
-            WHERE loan_time.email = '$email' 
-            AND loan_time.status IN ('dipinjam', 'terlambat')";  // hanya tampilkan yang masih dipinjam atau terlambat
+                    book.title, 
+                    book.cover, 
+                    book.isbn, 
+                    writer.name AS writer, 
+                    category.category_name AS category_name, 
+                    book.publication_year, 
+                    loan_time.loan_date, 
+                    loan_time.loan_id, 
+                    loan_time.email, 
+                    loan_time.return_date, 
+                    loan_time.estimated_return_date,
+                    loan_time.status
+                FROM loan_time
+                JOIN book ON loan_time.book_id = book.book_id
+                JOIN writer ON book.writer_id = writer.writer_id
+                JOIN category ON book.category_id = category.category_id";
+
+        // Kalau parameter email dikirim (berarti user biasa), tambahkan filter
+        if ($email !== null) {
+            $sql .= " WHERE loan_time.email = '$email'
+                    AND loan_time.status IN ('dipinjam', 'terlambat')";
+        }
+
+        $sql .= " ORDER BY loan_time.loan_date DESC"; // urutkan dari peminjaman terbaru
 
         $data = mysqli_query($this->conn, $sql);
         $hasil = [];
@@ -250,6 +258,8 @@ class database
         }
         return $hasil;
     }
+
+
 
     function getUsers()
     {
@@ -346,6 +356,20 @@ class database
         $sql   = "SELECT * FROM writer WHERE writer_id = $id";
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_assoc($result);
+    }
+    function deleteLoanTime($loan_id){
+        // Ambil data dulu: status & book_id
+        $query = mysqli_query($this->conn, "SELECT status, book_id FROM loan_time WHERE loan_id = '$loan_id'");
+        $loan = mysqli_fetch_assoc($query);
+
+        // Jika status belum "dikembalikan", berarti buku masih dipinjam, jadi stok harus ditambah
+        if ($loan && $loan['status'] != 'dikembalikan') {
+            $book_id = $loan['book_id'];
+            mysqli_query($this->conn, "UPDATE book SET copy = copy + 1 WHERE book_id = '$book_id'");
+        }
+
+        // Hapus data peminjaman
+        return mysqli_query($this->conn , "DELETE FROM loan_time WHERE loan_id = '$loan_id'");
     }
 
 
