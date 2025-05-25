@@ -15,7 +15,7 @@ if (isset($_GET['confirm']) && $_GET['confirm'] == 'yes') {
     // replace untuk menghapus halaman logout dari history
     echo "<script>
     alert('Anda telah berhasil logout');
-    window.location.replace('../front-end/home.html'); 
+    window.location.replace('../back-end/home.php'); 
     </script>";
 
     exit;
