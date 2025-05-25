@@ -245,7 +245,12 @@ body {
             background-color: #61b7d33b;
         }
 
-        /* Tambahkan style untuk tombol */
+        .container-btn {
+            display: flex;
+            justify-content: center;
+            padding-block: 50px;
+        }
+
         .btn-edit {
             background: #4CAF50;
             color: white;
@@ -272,6 +277,12 @@ body {
             text-decoration: none;
             margin-bottom: 20px;
             float: right;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-create:hover {
+            background-color: #3b718d;
+            transition: 0.3s ease-in-out;
         }
 
         .back-btn {

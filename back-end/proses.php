@@ -96,4 +96,46 @@ if (isset($_GET['aksi'])) {
             header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_gagal&error=used");
         }
     }
+
+    
+    if ($aksi == 'tambah_writer') {
+        $name = $_POST['name'];
+        $bio  = $_POST['bio'];
+        $result = $perpus->createWriter($name, $bio);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/authors_data.php?pesan=sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/add_authors.php?pesan=gagal");
+        }
+        exit();
+    }
+
+    if ($aksi == 'edit_writer') {
+        $id   = $_POST['writer_id'];
+        $name = $_POST['name'];
+        $bio  = $_POST['bio'];
+
+        $result = $perpus->updateWriter($id, $name, $bio);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/authors_data.php?pesan=update_sukses");
+        } else {
+            header("Location: ../back-end/DashboardAdmin/edit_authors.php?writer_id=$id&pesan=update_gagal");
+        }
+        exit();
+    }
+
+    if ($aksi == 'hapus_writer') {
+        $id     = $_GET['writer_id'];
+        $result = $perpus->deleteWriter($id);
+
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/authors_data.php?pesan=hapus_sukses");
+        } else {
+            // misal gagal karena masih digunakan di buku
+            header("Location: ../back-end/DashboardAdmin/authors_data.php?pesan=hapus_gagal&error=used");
+        }
+        exit();
+    }    
 }
