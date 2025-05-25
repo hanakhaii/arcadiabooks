@@ -357,6 +357,7 @@ class database
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_assoc($result);
     }
+    
     function deleteLoanTime($loan_id){
         // Ambil data dulu: status & book_id
         $query = mysqli_query($this->conn, "SELECT status, book_id FROM loan_time WHERE loan_id = '$loan_id'");

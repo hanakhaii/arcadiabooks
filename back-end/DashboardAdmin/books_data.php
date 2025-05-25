@@ -102,7 +102,7 @@ $perpus = new database();
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Title</th>
                         <th>Category</th>
                         <th>ISBN</th>
