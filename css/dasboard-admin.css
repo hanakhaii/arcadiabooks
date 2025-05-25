@@ -76,6 +76,9 @@ body {
         margin-bottom: 20px;
         margin-top: 80px;
     }
+    .sidebar .footer a{
+        text-decoration: none;
+    }
 
 /* Main Content Styles */
     main {
