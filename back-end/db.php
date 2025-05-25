@@ -88,7 +88,7 @@ class database
 
     function getWriters()
     {
-        $data = mysqli_query($this->conn, "SELECT name FROM writer");
+        $data = mysqli_query($this->conn, "SELECT * FROM writer");
         $hasil = [];
         while ($d = mysqli_fetch_array($data)) {
             $hasil[] = $d;
@@ -157,17 +157,21 @@ class database
     }
     public function deleteBook($id) {
     $id = (int)$id;
-    
-    // Cek apakah buku sedang dipinjam (memiliki relasi di tabel loan_time)
-    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id");
+
+    // Cek apakah buku sedang dipinjam atau terlambat
+    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id AND status IN ('dipinjam', 'terlambat')");
     if (mysqli_num_rows($check) > 0) {
-        return false; // Buku tidak bisa dihapus karena masih dipinjam
+        return "book_in_use"; // Kembalikan string status, bukan false
     }
-    
-    // Jika tidak ada relasi, hapus buku
+
+    // Hapus hanya jika tidak sedang dipinjam
     $sql = "DELETE FROM book WHERE book_id = $id";
-    return mysqli_query($this->conn, $sql);
-}
+    if (mysqli_query($this->conn, $sql)) {
+        return "success";
+    } else {
+        return "error";
+    }
+    }
 
 
     // Tambahkan method berikut di dalam class database

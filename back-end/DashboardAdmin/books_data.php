@@ -12,7 +12,7 @@ $perpus = new database();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/dasboard-admin.css">
+    <link rel="stylesheet" href="../../css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
 
@@ -77,19 +77,23 @@ $perpus = new database();
                     Loan
                 </li>
                 <!-- footer -->
-                <div class="footer">
-                    <li class="logout" onclick="alert('apakah anda yakin ingin logout?')" style="color: #FF0000;">
+                 <div class="footer">
+                    <a class="nav-link" href="../logout.php">
+                    <li class="logout" style="color: #FF0000;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
                         </svg>
                         Logout
                     </li>
+                    </a>
                 </div>
             </ul>
         </aside>
 
         <!-- main -->
         <main class="main_dashboard">
+           
+
             <h1>Books Data</h1>
 
             <a href="add_book.php" class="btn-create">Add New Book</a>
@@ -110,6 +114,19 @@ $perpus = new database();
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- untuk ngasi peringatakn ketika hapus gagal karena status buku yang di pinjam atau terlambat -->
+                     <?php
+                    if (isset($_GET['error'])) {
+                        if ($_GET['error'] == 'masih_dipinjam') {
+                            echo "<script>alert('Buku masih dipinjam atau terlambat, tidak bisa dihapus!');</script>";
+                        } elseif ($_GET['error'] == 'sistem') {
+                            echo "<script>alert('Terjadi kesalahan sistem saat menghapus buku!');</script>";
+                        }
+                        echo "<script>window.history.replaceState({}, document.title, window.location.pathname);</script>";
+                    }
+                    ?>
+
+                            
                     <?php
                     $books = $perpus->getAllBooks();
                     foreach ($books as $index => $book): ?>
@@ -121,17 +138,19 @@ $perpus = new database();
                             <td><?= $book['publisher'] ?></td>
                             <td><?= $book['publication_Year'] ?></td>
                             <td><?= $book['copy'] ?></td>
-                            <td><img src="uploads/<?= $book['cover'] ?>" width="50"></td>
+                            <td><img src="../../back-end/uploads/<?= $book['cover'] ?>" alt="cover"></td>
                             <td>
                                 <a href="../DashboardAdmin/edit_book.php?id=<?= $book['book_id'] ?>" class="btn-edit">Edit</a> |
                                 <a href="../proses.php?aksi=hapus_buku&id=<?= $book['book_id'] ?>"
                                     onclick="return confirm('Hapus buku ini?')"
                                     class="btn-delete">Hapus</a>
+
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
+                        
         </main>
 
     </section>

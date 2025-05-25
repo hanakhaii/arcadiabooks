@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/dasboard-admin.css">
+    <link rel="stylesheet" href="../../css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
 <body>
@@ -69,13 +69,15 @@
                     Loan
                 </li>
                 <!-- footer -->
-                <div class="footer">
-                    <li class="logout" onclick="alert('apakah anda yakin ingin logout?')" style="color: #FF0000;">
+                 <div class="footer">
+                    <a class="nav-link" href="../logout.php">
+                    <li class="logout" style="color: #FF0000;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
                         </svg>
                         Logout
                     </li>
+                    </a>
                 </div>
             </ul>
         </aside>

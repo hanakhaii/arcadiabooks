@@ -81,8 +81,9 @@ $categories = $perpus->category();
 
 <body>
     <div class="container">
-        <div class="logo">YUMEBOOK</div>
+        <div class="logo">ARCADIA BOOKS</div>
         <h1>Add Book</h1>
+       
         <form action="../proses.php?aksi=tambah_buku" method="post" enctype="multipart/form-data">
             <label for="cover">Cover Buku :</label>
             <input type="file" id="cover" name="cover">
