@@ -92,6 +92,8 @@ $perpus = new database();
         <main class="main_dashboard">
             <h1>Books Data</h1>
 
+            <a href="add_book.php" class="btn-create">Add New Book</a>
+
             <!-- table for books list data -->
             <table>
                 <thead>
@@ -110,24 +112,24 @@ $perpus = new database();
                 <tbody>
                     <?php
                     $books = $perpus->getAllBooks();
-
-                    foreach ($books as $index => $book) {
-                        echo "<tr>";
-                        echo "<td>" . ($index + 1) . "</td>";
-                        echo "<td>{$book['title']}</td>";
-                        echo "<td>{$book['category_name']}</td>";
-                        echo "<td>{$book['isbn']}</td>";
-                        echo "<td>{$book['publisher']}</td>";
-                        echo "<td>{$book['publication_Year']}</td>";
-                        echo "<td>{$book['copy']}</td>";
-                        echo "<td><img src='uploads/{$book['cover']}' width='50'></td>";
-                        echo "<td>
-                        <a href='../DashboardAdmin/edit_book.php?id={$book['book_id']}'>Edit</a> | 
-                        <a href='../proses.php?aksi=hapus_buku&id={$book['book_id']}' onclick=\"return confirm('Hapus buku ini?')\">Hapus</a>
-                            </td>";
-                        echo "</tr>";
-                    }
-                    ?>
+                    foreach ($books as $index => $book): ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= $book['title'] ?></td>
+                            <td><?= $book['category_name'] ?></td>
+                            <td><?= $book['isbn'] ?></td>
+                            <td><?= $book['publisher'] ?></td>
+                            <td><?= $book['publication_Year'] ?></td>
+                            <td><?= $book['copy'] ?></td>
+                            <td><img src="uploads/<?= $book['cover'] ?>" width="50"></td>
+                            <td>
+                                <a href="../DashboardAdmin/edit_book.php?id=<?= $book['book_id'] ?>" class="btn-edit">Edit</a> |
+                                <a href="../proses.php?aksi=hapus_buku&id=<?= $book['book_id'] ?>"
+                                    onclick="return confirm('Hapus buku ini?')"
+                                    class="btn-delete">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>

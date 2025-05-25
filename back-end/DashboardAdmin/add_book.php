@@ -90,21 +90,23 @@ $categories = $perpus->category();
             <label for="judul">Judul Buku :</label>
             <input type="text" id="judul" name="judul" placeholder="Contoh: Tan: Sebuah Novel">
 
-            <label for="writer_name">Penulis Buku :</label>
-            <select id="writer_name" name="writer_name">
+            <label for="writer_id">Penulis Buku :</label>
+            <select id="writer_id" name="writer_id">
                 <option value="">-- Pilih Penulis --</option>
                 <?php foreach ($writers as $w) : ?>
-                    <option value="<?= $w['name'] ?>"><?= $w['name'] ?></option>
+                    <option value="<?= $w['writer_id'] ?>"><?= $w['name'] ?></option>
                 <?php endforeach; ?>
             </select>
 
-            <label for="category_name">Kategori Buku :</label>
-            <select id="category_name" name="category_name">
+
+            <label for="category_id">Kategori Buku :</label>
+            <select id="category_id" name="category_id">
                 <option value="">-- Pilih Kategori --</option>
                 <?php foreach ($categories as $c) : ?>
-                    <option value="<?= $c['category_name'] ?>"><?= $c['category_name'] ?></option>
+                    <option value="<?= $c['category_id'] ?>"><?= $c['category_name'] ?></option>
                 <?php endforeach; ?>
             </select>
+
 
             <label for="isbn">ISBN :</label>
             <input type="text" id="isbn" name="isbn">

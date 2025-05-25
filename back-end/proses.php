@@ -16,8 +16,8 @@ if (isset($_GET['aksi'])) {
     }
     if ($aksi == 'tambah_buku') {
         $title = $_POST['judul'];
-        $writer_name = $_POST['writer_name'];
-        $category_name = $_POST['category_name'];
+        $writer_id = $_POST['writer_id'];
+        $category_id = $_POST['category_id'];
         $isbn = $_POST['isbn'];
         $publisher = $_POST['publisher'];
         $year = $_POST['tahun'];
@@ -27,11 +27,9 @@ if (isset($_GET['aksi'])) {
         $tmp = $_FILES['cover']['tmp_name'];
         $path = "uploads/" . $cover;
 
-        // Upload cover buku
         if (move_uploaded_file($tmp, $path)) {
-            // Simpan ke database
-            $query = "INSERT INTO book (title, writer_name, category_name, isbn, publisher, publication_year, copy, cover)
-                    VALUES ('$title', '$writer_name', '$category_name', '$isbn', '$publisher', '$year', '$copy', '$cover')";
+            $query = "INSERT INTO book (title, writer_id, category_id, isbn, publisher, publication_year, copy, cover)
+                VALUES ('$title', '$writer_id', '$category_id', '$isbn', '$publisher', '$year', '$copy', '$cover')";
 
             mysqli_query($perpus->conn, $query);
             header("Location: add_book.php?pesan=sukses");
@@ -39,6 +37,7 @@ if (isset($_GET['aksi'])) {
             echo "Gagal upload cover buku.";
         }
     }
+
     if ($aksi == 'edit_buku') {
         $id = $_GET['id'];
         $cover = null;
@@ -57,12 +56,11 @@ if (isset($_GET['aksi'])) {
         $book_id = $_GET['delete_book'];
         $hapus = $db->deleteBook($book_id);
 
-        if ($hapus) {
-            header("Location: ../back-end/dashboardadmin/books_data.php?pesan=berhasil_hapus");
+        if ($result) {
+            header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_sukses");
         } else {
-            header("Location: ../back-end/dashboardadmin/books_data.php?pesan=gagal_hapus_dipinjam");
+            header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_gagal&error=used");
         }
-        exit;
     }
     if ($aksi == 'tambah_kategori') {
         $category_name = $_POST['nama'];

@@ -144,20 +144,30 @@ class database
         return mysqli_query($this->conn, $sql);
     }
 
-    function deleteBook($id)
+    public function deleteCategory($id)
     {
-        $conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-
-        // Cek apakah buku sedang atau pernah dipinjam
-        $cek = mysqli_query($conn, "SELECT * FROM loan_time WHERE book_id = $id");
-        if (mysqli_num_rows($cek) > 0) {
-            return false; // Buku tidak bisa dihapus karena masih punya relasi
+        $id = (int)$id;
+        // Cek apakah kategori digunakan di buku
+        $check = mysqli_query($this->conn, "SELECT * FROM book WHERE category_id = $id");
+        if (mysqli_num_rows($check) > 0) {
+            return false;
         }
-
-        // Jika tidak ada relasi, lanjut hapus
-        $result = mysqli_query($conn, "DELETE FROM book WHERE book_id = $id");
-        return $result;
+        $sql = "DELETE FROM category WHERE category_id = $id";
+        return mysqli_query($this->conn, $sql);
     }
+    public function deleteBook($id) {
+    $id = (int)$id;
+    
+    // Cek apakah buku sedang dipinjam (memiliki relasi di tabel loan_time)
+    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id");
+    if (mysqli_num_rows($check) > 0) {
+        return false; // Buku tidak bisa dihapus karena masih dipinjam
+    }
+    
+    // Jika tidak ada relasi, hapus buku
+    $sql = "DELETE FROM book WHERE book_id = $id";
+    return mysqli_query($this->conn, $sql);
+}
 
 
     // Tambahkan method berikut di dalam class database
@@ -176,17 +186,6 @@ class database
         return mysqli_query($this->conn, $sql);
     }
 
-    public function deleteCategory($id)
-    {
-        $id = (int)$id;
-        // Cek apakah kategori digunakan di buku
-        $check = mysqli_query($this->conn, "SELECT * FROM book WHERE category_id = $id");
-        if (mysqli_num_rows($check) > 0) {
-            return false;
-        }
-        $sql = "DELETE FROM category WHERE category_id = $id";
-        return mysqli_query($this->conn, $sql);
-    }
 
     public function getCategoryById($id)
     {
