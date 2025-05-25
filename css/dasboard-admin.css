@@ -202,6 +202,52 @@ body {
             color: white;
         }
 
+                .btn-view {
+            background: #2686A6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+.btn-view:hover {
+    background: #1f6b8a;
+}
+
+          .btn-danger {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-danger:hover {
+            background: #bb2d3b;
+        }
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert.success {
+            background: #d1e7dd;
+            color: #0f5132;
+            border: 1px solid #badbcc;
+        }
+
+
         th, td {
             transition: 0.3s ease-in-out;
             border: 1px solid #ddd;
@@ -307,3 +353,40 @@ body {
                 padding: 10px;
                 border-radius: 5px;
             }
+
+            .user-books {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.loan-data {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.text-loan p {
+    margin: 0.5rem 0;
+}
+
+.text-loan b {
+    color: #2686A6;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-danger:hover {
+    background: #bb2d3b;
+}

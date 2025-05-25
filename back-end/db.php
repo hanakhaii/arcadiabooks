@@ -157,21 +157,17 @@ class database
     }
     public function deleteBook($id) {
     $id = (int)$id;
-
-    // Cek apakah buku sedang dipinjam atau terlambat
-    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id AND status IN ('dipinjam', 'terlambat')");
+    
+    // Cek apakah buku sedang dipinjam (memiliki relasi di tabel loan_time)
+    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id");
     if (mysqli_num_rows($check) > 0) {
-        return "book_in_use"; // Kembalikan string status, bukan false
+        return false; // Buku tidak bisa dihapus karena masih dipinjam
     }
-
-    // Hapus hanya jika tidak sedang dipinjam
+    
+    // Jika tidak ada relasi, hapus buku
     $sql = "DELETE FROM book WHERE book_id = $id";
-    if (mysqli_query($this->conn, $sql)) {
-        return "success";
-    } else {
-        return "error";
-    }
-    }
+    return mysqli_query($this->conn, $sql);
+}
 
 
     // Tambahkan method berikut di dalam class database
@@ -255,7 +251,56 @@ class database
         return $hasil;
     }
 
-    
+    function getUsers()
+    {
+        $data = mysqli_query($this->conn, "SELECT * FROM user");
+        $hasil = [];
+        while ($d = mysqli_fetch_assoc($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
+    // Hapus user berdasarkan email
+    public function deleteUser($email)
+    {
+        $email = mysqli_real_escape_string($this->conn, $email);
+
+        // Cek apakah user masih memiliki pinjaman aktif
+        $checkLoans = mysqli_query(
+            $this->conn,
+            "SELECT * FROM loan_time WHERE email = '$email' AND status IN ('dipinjam', 'terlambat')"
+        );
+
+        if (mysqli_num_rows($checkLoans) > 0) {
+            return false; // User masih memiliki pinjaman aktif
+        }
+
+        // Hapus riwayat peminjaman terlebih dahulu
+        mysqli_query($this->conn, "DELETE FROM loan_time WHERE email = '$email'");
+
+        // Baru hapus user
+        $sql = "DELETE FROM user WHERE email = '$email'";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    function getLoansByEmail($email)
+    {
+        $email = mysqli_real_escape_string($this->conn, $email);
+        $sql = "SELECT loan_time.*, book.title, book.cover 
+            FROM loan_time
+            JOIN book ON loan_time.book_id = book.book_id
+            WHERE loan_time.email = '$email'
+            ORDER BY loan_date DESC";
+
+        $data = mysqli_query($this->conn, $sql);
+        $hasil = [];
+        while ($d = mysqli_fetch_assoc($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
     public function getWriter()
     {
         $data = mysqli_query($this->conn, "SELECT * FROM writer");
@@ -302,6 +347,8 @@ class database
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_assoc($result);
     }
+
+
 }
 
 $perpus = new database();

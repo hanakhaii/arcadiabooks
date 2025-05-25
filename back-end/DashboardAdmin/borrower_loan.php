@@ -1,5 +1,18 @@
+<?php
+include '../db.php';
+$perpus = new database();
+
+// Get user data
+$email = $_GET['email'];
+$user = mysqli_fetch_assoc(mysqli_query($perpus->conn, "SELECT * FROM user WHERE email = '$email'"));
+
+// Get loan data
+$loans = $perpus->getLoansByEmail($email);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +21,9 @@
     <link rel="stylesheet" href="../../css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
+
 <body>
-        <section class="container">
+    <section class="container">
         <!-- sidebar -->
         <aside class="sidebar">
             <!-- logo & overlay sidebar -->
@@ -84,48 +98,59 @@
 
         <!-- main -->
         <main class="main_dashboard">
-            <!-- navigation -->
             <section class="back-btn">
-                <a href="/back-end/DashboardAdmin/users_data.php" class="navigation">
+                <a href="borrowers_data.php" class="navigation">
+                    <!-- icon panah kembali -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor" d="m4 10l-.707.707L2.586 10l.707-.707zm17 8a1 1 0 1 1-2 0zM8.293 15.707l-5-5l1.414-1.414l5 5zm-5-6.414l5-5l1.414 1.414l-5 5zM4 9h10v2H4zm17 7v2h-2v-2zm-7-7a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5z" />
                     </svg>
-                    Dashboard
+                    Back to Borrowers
                 </a>
             </section>
 
-            <h1>Loan Report <span style="color: #2686A6;">User 1</span></h1>
+            <h1>Loan Report <span style="color: #2686A6;"><?= htmlspecialchars($user['username']) ?></span></h1>
 
-            <!-- for a list of books borrowed by users -->
+            <?php if (isset($_GET['pesan'])): ?>
+                <div class="alert <?= strpos($_GET['pesan'], 'sukses') !== false ? 'success' : '' ?>">
+                    <?php
+                    switch ($_GET['pesan']) {
+                        case 'hapus_pinjaman_sukses':
+                            echo "Data peminjaman berhasil dihapus!";
+                            break;
+                        case 'hapus_pinjaman_gagal':
+                            echo "Gagal menghapus data peminjaman!";
+                            break;
+                    }
+                    ?>
+                </div>
+            <?php endif; ?>
+
             <section class="user-books">
-                <div class="loan-data">
-                    <img src="/img/30827710.jpg" alt="">
-                    <div class="text-loan">
-                        <p><b>Peminjam: 
-                            User 1
-                        </b></p>
-                        <p>Tanggal Peminjaman : </p>
-                        <p>Tanggal Pengembalian : </p>
+                <?php foreach ($loans as $loan): ?>
+                    <div class="loan-data">
+                        <img src="../uploads/<?= htmlspecialchars($loan['cover']) ?>" alt="Book Cover" style="width: 100px; height: 150px; object-fit: cover;">
+                        <div class="text-loan">
+                            <p><b>Judul Buku: <?= htmlspecialchars($loan['title']) ?></b></p>
+                            <p>Tanggal Pinjam: <?= $loan['loan_date'] ?></p>
+                            <p>Batas Kembali: <?= $loan['estimated_return_date'] ?></p>
+                            <p>Tanggal Kembali: <?= $loan['return_date'] ?? 'Belum dikembalikan' ?></p>
+                            <p>Status:
+                                <span style="color: 
+                        <?= $loan['status'] == 'dikembalikan' ? 'green' : ($loan['status'] == 'terlambat' ? 'red' : '#2686A6') ?>">
+                                    <?= ucfirst($loan['status']) ?>
+                                </span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                <?php endforeach; ?>
 
-                        <!-- plis tambahin kondisi, if status = sudah dikembalikan = color (green), else belum dikembalikan (color: red), -->
-                        <p>Status : Sudah Dikembalikan</p>
-                    </div>
-                </div>
-                <div class="loan-data">
-                    <img src="/img/30827710.jpg" alt="">
-                    <div class="text-loan">
-                        <p><b>Peminjam: 
-                            User 2
-                        </b></p>
-                        <p>Tanggal Peminjaman : </p>
-                        <p>Tanggal Pengembalian : </p>
-    
-                        <!-- plis tambahin kondisi, if status = sudah dikembalikan = color (green), else belum dikembalikan (color: red), -->
-                        <p>Status : Belum Dikembalikan</p>
-                    </div>
-                </div>
+                <?php if (empty($loans)): ?>
+                    <p style="text-align: center; color: #666;">Belum ada riwayat peminjaman</p>
+                <?php endif; ?>
             </section>
         </main>
+
     </section>
 
     <!-- javascript -->
@@ -155,6 +180,11 @@
             sidebar.classList.toggle('closed');
         }
 
+        function confirmDeleteLoan(loanId, email) {
+            if (confirm('Apakah Anda yakin ingin menghapus data peminjaman ini?')) {
+                window.location.href = `../proses.php?aksi=hapus_pinjaman&loan_id=${loanId}&email=${email}`;
+            }
+        }
 
         // Fungsi untuk menangani klik pada <li>
         function handleLiClick(event) {
@@ -200,4 +230,5 @@
     </script>
 </body>
 </body>
+
 </html>
