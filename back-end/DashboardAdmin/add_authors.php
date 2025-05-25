@@ -1,3 +1,7 @@
+<?php
+require_once '../db.php';
+$perpus = new database();
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -77,9 +81,9 @@
     <div class="container">
         <div class="logo">YUMEBOOK</div>
         <h1>Add Author Data</h1>
-        <form action="proses_add_author.php" method="post">
-            <label for="nama">Penulis Buku :</label>
-            <input type="text" id="nama" name="nama" placeholder="Nama Penulis" required>
+        <form action="../proses.php?aksi=tambah_writer" method="post">
+            <label for="name">Penulis Buku :</label>
+            <input type="text" id="name" name="name" placeholder="Nama Penulis" required>
 
             <label for="bio">Bio Penulis</label>
             <textarea id="bio" name="bio" placeholder="Tulis biografi penulis..." required></textarea>

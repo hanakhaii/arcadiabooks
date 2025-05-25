@@ -1,3 +1,9 @@
+<?php
+include_once '../db.php';
+$perpus = new database();
+$writer = $perpus->getWriter();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/dasboard-admin.css">
+    <link rel="stylesheet" href="../../css/dasboard-admin.css">
     <title>Dashboard Arcadia Book</title>
 </head>
 
@@ -71,13 +77,15 @@
                     Loan
                 </li>
                 <!-- footer -->
-                <div class="footer">
-                    <li class="logout" onclick="alert('apakah anda yakin ingin logout?')" style="color: #FF0000;">
+                 <div class="footer">
+                    <a class="nav-link" href="../logout.php">
+                    <li class="logout" style="color: #FF0000;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
                         </svg>
                         Logout
                     </li>
+                    </a>
                 </div>
             </ul>
         </aside>
@@ -86,27 +94,33 @@
         <main class="main_dashboard">
             <h1>Authors Data</h1>
 
+            <a href="add_authors.php" class="btn-create">Add New Authors</a>
+
             <!-- table for authors list data -->
             <table>
                 <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>ISBN</th>
-                    <th>Publisher</th>
-                    <th>Publication Year</th>
-                    <th>Copy</th>
-                    <th>Cover</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Bio</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
+                <?php foreach ($writer as $write): ?>
                 <tbody>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>ISBN</td>
-                    <td>Publisher</td>
-                    <td>Publication Year</td>
-                    <td>Copy</td>
-                    <td>Cover</td>
+                    <tr>
+                        <td><?= $write['writer_id'] ?></td>
+                        <td><?= $write['name'] ?></td>
+                        <td><?= $write['bio'] ?></td>
+                        <td class="container-btn">
+                            <a href="edit_authors.php?writer_id=<?= $write['writer_id'] ?>" class="btn-edit">Edit</a>
+                            <br>
+                            <a href="../proses.php?aksi=hapus_writer&writer_id=<?= $write['writer_id'] ?>"
+                                class="btn-delete"
+                                onclick="return confirm('Yakin hapus kategori?')">Delete</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>
@@ -152,7 +166,7 @@
                     url = 'dashboard_admin.php';
                     break;
                 case 'books':
-                    url = 'book_data.php';
+                    url = 'books_data.php';
                     break;
                 case 'categories':
                     url = 'categories_data.php';
@@ -183,5 +197,4 @@
         });
     </script>
 </body>
-
 </html>

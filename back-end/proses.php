@@ -32,7 +32,7 @@ if (isset($_GET['aksi'])) {
                 VALUES ('$title', '$writer_id', '$category_id', '$isbn', '$publisher', '$year', '$copy', '$cover')";
 
             mysqli_query($perpus->conn, $query);
-            header("Location: add_book.php?pesan=sukses");
+            header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=sukses");
         } else {
             echo "Gagal upload cover buku.";
         }
@@ -51,17 +51,18 @@ if (isset($_GET['aksi'])) {
         $perpus->updateBook($id, $_POST, $cover);
         header("Location: ../back-end/dashboardadmin/books_data.php?pesan=update");
     }
+   if ($aksi == 'hapus_buku') {
+    $book_id = $_GET['id'];
+    $result = $perpus->deleteBook($book_id);
 
-    if (isset($_GET['hapus_buku'])) {
-        $book_id = $_GET['delete_book'];
-        $hapus = $db->deleteBook($book_id);
-
-        if ($result) {
-            header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_sukses");
-        } else {
-            header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_gagal&error=used");
-        }
+    if ($result == "success") {
+        header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_sukses");
+    } elseif ($result == "book_in_use") {
+        header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_gagal&error=masih_dipinjam");
+    } else {
+        header("Location: ../back-end/DashboardAdmin/books_data.php?pesan=hapus_gagal&error=sistem");
     }
+}
     if ($aksi == 'tambah_kategori') {
         $category_name = $_POST['nama'];
         $result = $perpus->createCategory($category_name);
@@ -96,15 +97,4 @@ if (isset($_GET['aksi'])) {
             header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_gagal&error=used");
         }
     }
-    if ($aksi == 'hapus_user') {
-    $email = $_GET['email'];
-    $result = $perpus->deleteUser($email);
-    
-    if ($result) {
-        header("Location: ../back-end/DashboardAdmin/borrowers_data.php?pesan=hapus_sukses");
-    } else {
-        header("Location: ../back-end/DashboardAdmin/borrowers_data.php?pesan=hapus_gagal&error=active_loans");
-    }
-
-}
 }
