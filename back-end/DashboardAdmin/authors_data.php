@@ -1,3 +1,9 @@
+<?php
+include_once '../db.php';
+$perpus = new database();
+$writer = $perpus->getWriter();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,27 +94,33 @@
         <main class="main_dashboard">
             <h1>Authors Data</h1>
 
+            <a href="add_authors.php" class="btn-create">Add New Authors</a>
+
             <!-- table for authors list data -->
             <table>
                 <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>ISBN</th>
-                    <th>Publisher</th>
-                    <th>Publication Year</th>
-                    <th>Copy</th>
-                    <th>Cover</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Bio</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
+                <?php foreach ($writer as $write): ?>
                 <tbody>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>ISBN</td>
-                    <td>Publisher</td>
-                    <td>Publication Year</td>
-                    <td>Copy</td>
-                    <td>Cover</td>
+                    <tr>
+                        <td><?= $write['writer_id'] ?></td>
+                        <td><?= $write['name'] ?></td>
+                        <td><?= $write['bio'] ?></td>
+                        <td class="container-btn">
+                            <a href="edit_authors.php?writer_id=<?= $write['writer_id'] ?>" class="btn-edit">Edit</a>
+                            <br>
+                            <a href="../proses.php?aksi=hapus_writer&writer_id=<?= $write['writer_id'] ?>"
+                                class="btn-delete"
+                                onclick="return confirm('Yakin hapus kategori?')">Delete</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>
@@ -185,5 +197,4 @@
         });
     </script>
 </body>
-
 </html>

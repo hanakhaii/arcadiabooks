@@ -254,6 +254,54 @@ class database
         }
         return $hasil;
     }
+
+    
+    public function getWriter()
+    {
+        $data = mysqli_query($this->conn, "SELECT * FROM writer");
+        $hasil = [];
+        while ($d = mysqli_fetch_array($data)) {
+            $hasil[] = $d;
+        }
+        return $hasil;
+    }
+
+    public function createWriter($name, $bio) 
+    {
+        $name = mysqli_real_escape_string($this->conn, $name);
+        $bio  = mysqli_real_escape_string($this->conn, $bio);
+        $sql  = "INSERT INTO writer (name, bio) VALUES ('$name', '$bio')";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function updateWriter($id, $name, $bio)
+    {
+        $id   = (int)$id;
+        $name = mysqli_real_escape_string($this->conn, $name);
+        $bio  = mysqli_real_escape_string($this->conn, $bio);
+        $sql  = "UPDATE writer SET name = '$name', bio = '$bio' WHERE writer_id = $id";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function deleteWriter($id)
+    {
+        $id = (int)$id;
+        // Cek apakah penulis digunakan di buku
+        $check = mysqli_query($this->conn, "SELECT * FROM book WHERE writer_id = $id");
+        if (mysqli_num_rows($check) > 0) {
+            return false;
+        }
+        $sql = "DELETE FROM writer WHERE writer_id = $id";
+        return mysqli_query($this->conn, $sql);
+    }
+
+    public function getWriterById($id)
+    {
+        $id    = (int)$id;
+        $sql   = "SELECT * FROM writer WHERE writer_id = $id";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
 }
 
 $perpus = new database();

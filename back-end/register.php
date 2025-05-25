@@ -58,19 +58,36 @@
                 text-decoration: none;
             }
 
+            form a {
+                padding: 8px;
+                background-color: #9EB9C2;
+                font-size: 13px;
+                border-radius: 3px;
+                color: white;
+                transition: 0.3s ease-in-out;
+            }
+
+            form a:hover {
+                color: black;
+                background-color:rgb(173, 210, 222);
+                transition: 0.3s ease-in-out;
+            }
+
             form button {
                 padding: 8px;
                 background-color: #9EB9C2;
+                transition: 0.3s ease-in-out;
                 font-size: 13px;
                 border-radius: 3px;
                 color: white;
                 border: none;
             }
 
-            form button
-            :hover {
+            form button:hover {
+                cursor: pointer;
                 color: black;
                 background-color: #f0f0f0;
+                transition: 0.3s ease-in-out;
             }
 
             .register p {
