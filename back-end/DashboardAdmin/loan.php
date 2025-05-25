@@ -1,3 +1,11 @@
+<?php
+include "../db.php";
+include "../session.php";
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,12 +80,14 @@
                 </li>
                 <!-- footer -->
                 <div class="footer">
-                    <li class="logout" onclick="alert('apakah anda yakin ingin logout?')" style="color: #FF0000;">
+                    <a class="nav-link" href="../logout.php">
+                    <li class="logout" style="color: #FF0000;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.023 5.5a9 9 0 1 0 9.953 0M12 2v8" color="currentColor" />
                         </svg>
                         Logout
                     </li>
+                    </a>
                 </div>
             </ul>
         </aside>
@@ -85,6 +95,8 @@
         <!-- main -->
         <main class="main_dashboard">
             <h1>Loan Data</h1>
+
+            <a href="add_loan_data.php" class="btn-create">Create New Loan</a>
 
             <!-- table for books list data -->
             <table>
