@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,9 @@
     <link rel="stylesheet" href="/css/dasboard-admin.css">
     <title>Document</title>
 </head>
+
 <body>
-        <section class="container">
+    <section class="container">
         <!-- sidebar -->
         <aside class="sidebar">
             <!-- logo & overlay sidebar -->
@@ -81,33 +83,71 @@
         </aside>
 
         <!-- main -->
+
         <main class="main_dashboard">
             <h1>Borrowers Data</h1>
 
-            <!-- table for books list data -->
+            <?php if (isset($_GET['pesan'])): ?>
+                <div class="alert <?= $_GET['pesan'] == 'hapus_sukses' ? 'success' : '' ?>">
+                    <?php
+                    switch ($_GET['pesan']) {
+                        case 'hapus_sukses':
+                            echo "User berhasil dihapus!";
+                            break;
+                        case 'hapus_gagal':
+                            $error = $_GET['error'] ?? '';
+                            if ($error == 'active_loans') {
+                                echo "Gagal menghapus! User masih memiliki peminjaman aktif.";
+                            } else {
+                                echo "Gagal menghapus user!";
+                            }
+                            break;
+                    }
+                    ?>
+                </div>
+            <?php endif; ?>
+
             <table>
                 <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>ISBN</th>
-                    <th>Publisher</th>
-                    <th>Publication Year</th>
-                    <th>Copy</th>
-                    <th>Cover</th>
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>ISBN</td>
-                    <td>Publisher</td>
-                    <td>Publication Year</td>
-                    <td>Copy</td>
-                    <td>Cover</td>
+                    <?php
+                    include '../db.php';
+                    $perpus = new database();
+                    $users = $perpus->getUsers();
+                    $no = 1;
+                    foreach ($users as $user):
+                    ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td><?= htmlspecialchars($user['username']) ?></td>
+                            <td><?= htmlspecialchars($user['email']) ?></td>
+                            <td><?= ucfirst($user['role']) ?></td>
+                            <td>
+                                <?php if ($user['role'] == 'peminjam'): ?>
+                                    <a href="borrower_loan.php?email=<?= urlencode($user['email']) ?>" class="btn-view">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                    <button onclick="confirmDelete('<?= $user['email'] ?>')" class="btn-danger">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                <?php else: ?>
+                                    <span style="color: #6c757d;">Admin cannot be deleted</span>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </main>
+
     </section>
 
     <!-- javascript -->
@@ -135,6 +175,12 @@
         function toggleMobileMenu() {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('closed');
+        }
+
+        function confirmDelete(email) {
+            if (confirm(`Are you sure you want to delete user with email: ${email}?`)) {
+                window.location.href = `../proses.php?aksi=hapus_user&email=${email}`;
+            }
         }
 
 
@@ -181,4 +227,5 @@
         });
     </script>
 </body>
+
 </html>

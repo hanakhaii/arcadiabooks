@@ -96,4 +96,15 @@ if (isset($_GET['aksi'])) {
             header("Location: ../back-end/DashboardAdmin/categories_data.php?pesan=hapus_gagal&error=used");
         }
     }
+    if ($aksi == 'hapus_user') {
+    $email = $_GET['email'];
+    $result = $perpus->deleteUser($email);
+    
+    if ($result) {
+        header("Location: ../back-end/DashboardAdmin/borrowers_data.php?pesan=hapus_sukses");
+    } else {
+        header("Location: ../back-end/DashboardAdmin/borrowers_data.php?pesan=hapus_gagal&error=active_loans");
+    }
+
+}
 }
