@@ -377,6 +377,31 @@ class database {
         $sql = "DELETE FROM writer WHERE writer_id = $id";
         return mysqli_query($this->conn, $sql);
     }
+    public function topBooks()
+    {
+    $sql = "SELECT 
+                book.book_id,
+                book.title,
+                book.cover,
+                writer.name AS writer,
+                category.category_name,
+                COUNT(loan_time.book_id) AS total_loans
+            FROM loan_time
+            JOIN book ON loan_time.book_id = book.book_id
+            JOIN writer ON book.writer_id = writer.writer_id
+            JOIN category ON book.category_id = category.category_id
+            GROUP BY loan_time.book_id
+            ORDER BY total_loans DESC
+            LIMIT 3";
+
+    $data = mysqli_query($this->conn, $sql);
+    $hasil = [];
+    while ($d = mysqli_fetch_assoc($data)) {
+        $hasil[] = $d;
+    }
+    return $hasil;
+    }
+
 }
 
 $perpus = new database();
