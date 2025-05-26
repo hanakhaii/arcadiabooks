@@ -15,7 +15,7 @@ $books = $perpus->books($keyword);
   <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
   <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
   <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
-  <title>Arcadia Book</title>
+  <title>Arcadia Books</title>
 </head>
 
 <body>
@@ -73,7 +73,7 @@ $books = $perpus->books($keyword);
     <!-- header -->
     <header>
       <!-- watermark -->
-      <h5>Arcadia Book</h5>
+      <h5>Arcadia Books</h5>
 
       <!-- search input -->
       <div class="search">
@@ -151,7 +151,7 @@ $books = $perpus->books($keyword);
 
   <!-- copyright -->
   <footer>
-    <p>© 2025, Arcadia Book. All right reserved</p>
+    <p>© 2025, Arcadia Books. All right reserved</p>
   </footer>
 </body>
 

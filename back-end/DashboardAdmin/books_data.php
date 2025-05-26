@@ -14,7 +14,7 @@ $perpus = new database();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link rel="stylesheet" href="../../css/dasboard-admin.css">
-    <title>Dashboard Arcadia Book</title>
+    <title>Dashboard Arcadia Books</title>
 </head>
 
 <body>
@@ -24,7 +24,7 @@ $perpus = new database();
             <!-- logo & overlay sidebar -->
             <div class="logo">
                 <!-- logo -->
-                <p>Arcadia Book</p>
+                <p>Arcadia Books</p>
                 <i class="bi bi-layout-sidebar-inset"></i>
             </div>
             <!-- menu sidebar -->
@@ -151,9 +151,10 @@ $perpus = new database();
                     <?php endforeach; ?>
                 </tbody>
             </table>
-                        
+            
+            <div class="footer-main" style="margin-top: 50px;">&copy; 2025, Arcadia Books. All rights reserved.</div>
+            
         </main>
-
     </section>
 
     <!-- javascript -->

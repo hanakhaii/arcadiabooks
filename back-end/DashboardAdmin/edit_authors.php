@@ -17,6 +17,7 @@ if (!$writer) {
     <meta charset="UTF-8">
     <title>Edit Author</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dasboard-admin.css">
     <style>
         * {
             font-family: 'Poppins', sans-serif;
@@ -79,6 +80,7 @@ if (!$writer) {
             cursor: pointer;
             float: right;
             margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .btn-submit:hover {
@@ -88,21 +90,30 @@ if (!$writer) {
 </head>
 
 <body>
-    <div class="container">
-        <div class="logo">ARCADIA BOOKS</div>
-        <h1>Edit Author</h1>
-        <form action="../proses.php?aksi=edit_writer" method="post">
-            <input type="hidden" name="writer_id" value="<?= $writer['writer_id'] ?>">
+    <!-- navigation -->
+    <section class="back-btn">
+        <a href="/back-end/DashboardAdmin/authors_data.php" class="navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                    d="m4 10l-.707.707L2.586 10l.707-.707zm17 8a1 1 0 1 1-2 0zM8.293 15.707l-5-5l1.414-1.414l5 5zm-5-6.414l5-5l1.414 1.414l-5 5zM4 9h10v2H4zm17 7v2h-2v-2zm-7-7a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5z" />
+            </svg>
+            Dashboard
+        </a>
+    </section>
 
-            <label for="name">Name :</label>
-            <input type="text" id="name" name="name" value="<?= $writer['name'] ?>" required>
+    <div class="logo">ARCADIA BOOKS</div>
+    <h1>Edit Author</h1>
+    <form action="../proses.php?aksi=edit_writer" method="post">
+        <input type="hidden" name="writer_id" value="<?= $writer['writer_id'] ?>">
 
-            <label for="bio">Bio :</label>
-            <textarea id="bio" name="bio" required><?= $writer['bio'] ?></textarea>
+        <label for="name">Name :</label>
+        <input type="text" id="name" name="name" value="<?= $writer['name'] ?>" required>
 
-            <button type="submit" class="btn-submit">Update Author</button>
-        </form>
-    </div>
+        <label for="bio">Bio :</label>
+        <textarea id="bio" name="bio" required><?= $writer['bio'] ?></textarea>
+
+        <button type="submit" class="btn-submit">Update Author</button>
+    </form>
 </body>
 
 </html>

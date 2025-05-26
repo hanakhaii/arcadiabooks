@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pinjam'])) {
     <main>
         <header>
             <!-- watermark -->
-            <h5>Arcadia Book</h5>
+            <h5>Arcadia Books</h5>
 
             <!-- account icon -->
             <div class="account-icn">
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pinjam'])) {
 
     <!-- copyright -->
     <footer>
-        <p>© 2025, Arcadia Book. All right reserved</p>
+        <p>© 2025, Arcadia Books. All right reserved</p>
     </footer>
 </body>
 

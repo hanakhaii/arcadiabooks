@@ -17,7 +17,7 @@ $dataPinjam = $perpus->loantime(); // tidak kirim email → tampil semua
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link rel="stylesheet" href="../../css/dasboard-admin.css">
-    <title>Dashboard Arcadia Book</title>
+    <title>Dashboard Arcadia Books</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@ $dataPinjam = $perpus->loantime(); // tidak kirim email → tampil semua
             <!-- logo & overlay sidebar -->
             <div class="logo">
                 <!-- logo -->
-                <p>Arcadia Book</p>
+                <p>Arcadia Books</p>
                 <i class="bi bi-layout-sidebar-inset"></i>
             </div>
             <!-- menu sidebar -->
@@ -133,10 +133,12 @@ $dataPinjam = $perpus->loantime(); // tidak kirim email → tampil semua
 
                         <a href="../proses.php?loan_id=<?= $l['loan_id'] ?>&aksi=deleteloan" onclick="return confirm('Apakah Anda yakin ingin menghapus data peminjaman ini?')" class="btn-delete">Delete</a>
                     </td>
-                    
                 </tbody>
                 <?php  } ?>
             </table>
+
+            <div class="footer-main" style="margin-top: 50px;">&copy; 2025, Arcadia Books. All rights reserved.</div>
+            
         </main>
     </section>
 

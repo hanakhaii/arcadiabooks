@@ -19,7 +19,7 @@ $loans = $perpus->getLoansByEmail($email);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link rel="stylesheet" href="../../css/dasboard-admin.css">
-    <title>Dashboard Arcadia Book</title>
+    <title>Dashboard Arcadia Books</title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@ $loans = $perpus->getLoansByEmail($email);
             <!-- logo & overlay sidebar -->
             <div class="logo">
                 <!-- logo -->
-                <p>Arcadia Book</p>
+                <p>Arcadia Books</p>
                 <i class="bi bi-layout-sidebar-inset"></i>
             </div>
             <!-- menu sidebar -->
@@ -70,7 +70,7 @@ $loans = $perpus->getLoansByEmail($email);
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 19v-1.25c0-2.071-1.919-3.75-4.286-3.75h-3.428C7.919 14 6 15.679 6 17.75V19m9-11a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
                     </svg>
-                    Borrower
+                    Borrowers
                 </li>
 
                 <li id="loan">

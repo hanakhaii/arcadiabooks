@@ -14,7 +14,7 @@ include '../session.php';
     <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
-    <title>Arcadia Book</title>
+    <title>Arcadia Books</title>
 </head>
 
 <body>
@@ -74,7 +74,7 @@ include '../session.php';
             <!-- header -->
              <header>
               <!-- watermark -->
-              <h5>Arcadia Book</h5>
+              <h5>Arcadia Books</h5>
               
               <!-- account icon -->
               <div class="account-icn">
@@ -145,7 +145,7 @@ include '../session.php';
 
             <!-- copyright -->
             <footer>
-                <p>© 2025, Arcadia Book. All right reserved</p>
+                <p>© 2025, Arcadia Books. All right reserved</p>
             </footer>
 </body>
 </html>

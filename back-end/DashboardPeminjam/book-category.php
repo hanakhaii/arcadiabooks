@@ -28,7 +28,7 @@ $books = $perpus->booksByCategory($catId);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/css/coreui.min.css" rel="stylesheet">
-    <title>Arcadia Book</title>
+    <title>Arcadia Books</title>
     <link rel="stylesheet" href="../../css/dashboard-peminjam.css">
     <script defer src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.3.1/dist/js/coreui.bundle.min.js"></script>
 </head>
@@ -88,7 +88,7 @@ $books = $perpus->booksByCategory($catId);
         <!-- header -->
         <header>
           <!-- watermark -->
-          <h5>Arcadia Book</h5>
+          <h5>Arcadia Books</h5>
           <!-- account icon -->
           <div class="account-icn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="translate: -50% -50%">

@@ -10,7 +10,7 @@
 <body>
     <div class="kurung">
         <nav>
-            <h1>Arcadia Library</h1>
+            <h1>Arcadia Books</h1>
 
             <ul>
                 <li><a href="#home" class="btn-nav">Home</a></li>
@@ -36,8 +36,8 @@
         <section class="sec2" id="about">
             <div class="about">
                 <center>
-                    <h1>About Arcadia Library</h1>
-                    <p> <span>Arcadia Library,</span> sebuah platform yang memudahkan Anda dalam menemukan, menyimpan,
+                    <h1>About Arcadia Books</h1>
+                    <p> <span>Arcadia Books,</span> sebuah platform yang memudahkan Anda dalam menemukan, menyimpan,
                         dan menjelajahi
                         berbagai
                         koleksi buku serta mengenal lebih dekat para penulisnya. Lewat Yumebook, Anda dapat mencari buku
@@ -49,14 +49,14 @@
             <div class="visi-misi">
                 <div class="visi">
                     <h1>Visi</h1>
-                    <p>Dengan Arcadia Library, Anda tidak hanya bisa menemukan buku yang Anda butuhkan, tetapi juga
+                    <p>Dengan Arcadia Books, Anda tidak hanya bisa menemukan buku yang Anda butuhkan, tetapi juga
                         mengelola riwayat peminjaman dengan lebih efisien. Kami ingin membangun budaya literasi yang
                         lebih modern, di mana teknologi membantu mendekatkan pembaca dengan buku tanpa menghilangkan
                         pengalaman khas dari perpustakaan fisik.</p>
                 </div>
                 <div class="misi">
                     <h1>Misi</h1>
-                    <p>Arcadia Library ingin menjadi jembatan antara dunia digital dan perpustakaan fisik, menciptakan
+                    <p>Arcadia Books ingin menjadi jembatan antara dunia digital dan perpustakaan fisik, menciptakan
                         ekosistem literasi yang lebih cerdas dan terintegrasi. Kami percaya bahwa membaca adalah
                         perjalanan yang tidak hanya memperkaya wawasan tetapi juga membangun koneksi yang lebih dalam
                         dengan ilmu dan cerita.</p>
@@ -92,7 +92,7 @@
             <div class="bawah">
                 <h1>Find <br> Anybook <br> You Want!</h1>
                 <p>Just one touch!</p>
-                <p style="margin-top: 30px;">© 2025, Yumebook. All rights reserved.</p>
+                <p style="margin-top: 30px;">© 2025, Arcadia Books. All rights reserved.</p>
             </div>
         </footer>
     </div>
