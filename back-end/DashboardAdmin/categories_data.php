@@ -1,6 +1,7 @@
 <?php
 require_once 'C:/laragon/www/arcadiabooks/back-end/db.php';
 $perpus = new database();
+include "../session.php";
 $categories = $perpus->category();
 ?>
 <!DOCTYPE html>

@@ -132,7 +132,6 @@ $dataPinjam = $perpus->loantime(); // tidak kirim email → tampil semua
                         <a href="edit_loan.php?loan_id=<?= $l['loan_id'] ?>" class="btn-edit">Edit</a>
 
                         <a href="../proses.php?loan_id=<?= $l['loan_id'] ?>&aksi=deleteloan" onclick="return confirm('Apakah Anda yakin ingin menghapus data peminjaman ini?')" class="btn-delete">Delete</a>
-
                     </td>
                     
                 </tbody>

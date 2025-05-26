@@ -1,3 +1,8 @@
+<?php 
+include_once '../db.php';
+$perpus = new database();
+include "../session.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -197,7 +202,7 @@
                 case 'books':
                     url = 'books_data.php';
                     break;
-                case 'category':
+                case 'categories':
                     url = 'categories_data.php';
                     break;
                 case 'authors':

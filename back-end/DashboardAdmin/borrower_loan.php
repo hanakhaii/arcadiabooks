@@ -130,11 +130,11 @@ $loans = $perpus->getLoansByEmail($email);
                     <div class="loan-data">
                         <img src="../uploads/<?= htmlspecialchars($loan['cover']) ?>" alt="Book Cover" style="width: 100px; height: 150px; object-fit: cover;">
                         <div class="text-loan">
-                            <p><b>Judul Buku: <?= htmlspecialchars($loan['title']) ?></b></p>
-                            <p>Tanggal Pinjam: <?= $loan['loan_date'] ?></p>
+                        <h3><b>Judul Buku: <?= htmlspecialchars($loan['title']) ?></b></h3>
+                        <p>Tanggal Pinjam: <?= $loan['loan_date'] ?></p>
                             <p>Batas Kembali: <?= $loan['estimated_return_date'] ?></p>
                             <p>Tanggal Kembali: <?= $loan['return_date'] ?? 'Belum dikembalikan' ?></p>
-                            <p>Status:
+                            <p style="margin-top: 20px;">Status:
                                 <span style="color: 
                         <?= $loan['status'] == 'dikembalikan' ? 'green' : ($loan['status'] == 'terlambat' ? 'red' : '#2686A6') ?>">
                                     <?= ucfirst($loan['status']) ?>

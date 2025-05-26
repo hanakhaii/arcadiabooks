@@ -241,7 +241,8 @@ header {
 
 .book-container img {
   margin: 30px;
-  max-width: 210px;
+  width: 200px;
+  height: 280px;
 }
 
 .book-container p {

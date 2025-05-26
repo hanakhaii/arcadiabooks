@@ -1,5 +1,6 @@
 <?php
 include_once '../db.php';
+include "../session.php";
 $perpus = new database();
 ?>
 
@@ -140,7 +141,7 @@ $perpus = new database();
                             <td><?= $book['copy'] ?></td>
                             <td><img src="../../back-end/uploads/<?= $book['cover'] ?>" alt="cover"></td>
                             <td>
-                                <a href="../DashboardAdmin/edit_book.php?id=<?= $book['book_id'] ?>" class="btn-edit">Edit</a> |
+                                <a href="../DashboardAdmin/edit_book.php?id=<?= $book['book_id'] ?>" class="btn-edit">Edit</a> 
                                 <a href="../proses.php?aksi=hapus_buku&id=<?= $book['book_id'] ?>"
                                     onclick="return confirm('Hapus buku ini?')"
                                     class="btn-delete">Hapus</a>

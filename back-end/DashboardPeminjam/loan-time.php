@@ -126,7 +126,7 @@ include '../session.php';
                       <p>Tanggal Pengembalian :<?= ($l['return_date'] != '0000-00-00' && $l['return_date'] != '') ? $l['return_date'] : '-' ?> </p>
                     </div>
                     
-                      <span><?= $tenggat_text ?></span>
+                      <span style="color: red;"><?= $tenggat_text ?></span>
                   </div>
                 </div>
               </div>

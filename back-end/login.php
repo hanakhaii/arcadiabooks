@@ -47,14 +47,35 @@
         }
 
         .form-sec input {
+            margin-top: 10px;
             margin-bottom: 20px;
             padding: 8px;
             padding-right: 20px;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+        }
+        
+        .form-sec input:hover {
+            transition: 0.3s ease-in-out;
+            border: 2px solid #9EB9C2;
         }
 
         .form-sec a {
             text-decoration: none;
+            transition: 0.3s ease-in-out;
         }
+
+        .form-sec a:hover {
+            color: #3f7281;
+            transition: 0.3s ease-in-out;
+        }
+
+        .form-sec input:focus {
+            border: 2px solid #9EB9C2;
+            outline: none; /* Untuk menghilangkan garis biru default dari browser */
+            transition: 0.3s ease-in-out;
+        }
+
 
         form a {
             padding: 8px;

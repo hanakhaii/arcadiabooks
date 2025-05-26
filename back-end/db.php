@@ -1,8 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-class database
-{
+class database {
     public $host = "localhost";
     public $username = "root";
     public $password = "";
@@ -378,8 +377,6 @@ class database
         $sql = "DELETE FROM writer WHERE writer_id = $id";
         return mysqli_query($this->conn, $sql);
     }
-
-    
 }
 
 $perpus = new database();

@@ -1,6 +1,7 @@
 <?php
 include_once '../db.php';
 $perpus = new database();
+include "../session.php";
 $writer = $perpus->getWriters();
 ?>
 
@@ -114,7 +115,7 @@ $writer = $perpus->getWriters();
                         <td><?= $write['bio'] ?></td>
                         <td class="container-btn">
                             <a href="edit_authors.php?writer_id=<?= $write['writer_id'] ?>" class="btn-edit">Edit</a>
-                            <br>
+                            
                             <a href="../proses.php?aksi=hapus_writer&writer_id=<?= $write['writer_id'] ?>"
                                 class="btn-delete"
                                 onclick="return confirm('Yakin hapus kategori?')">Delete</a>

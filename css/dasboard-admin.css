@@ -303,6 +303,15 @@ body {
             padding-block: 50px;
         }
 
+        td a {
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            white-space: nowrap;
+            margin: 5px;
+        }
+
+
         .btn-edit {
             background: #4CAF50;
             color: white;
@@ -310,6 +319,12 @@ body {
             border-radius: 4px;
             text-decoration: none;
             margin-right: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-edit:hover {
+            background: #0f5132;
+            transition: 0.3s ease-in-out;
         }
 
         .btn-delete {
@@ -318,10 +333,15 @@ body {
             padding: 5px 10px;
             border-radius: 4px;
             text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-delete:hover {
+            background: rgb(136, 63, 63);
+            transition: 0.3s ease-in-out;
         }
 
         .btn-create {
-            display: inline-block;
             background: #2196F3;
             color: white;
             padding: 10px 20px;
@@ -355,38 +375,43 @@ body {
             }
 
             .user-books {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-.loan-data {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    align-items: center;
-}
+    .loan-data {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        align-items: center;
+    }
 
-.text-loan p {
-    margin: 0.5rem 0;
-}
+        .text-loan p {
+            margin: 0.5rem 0;
+            font-size: 14px;
+        }
 
-.text-loan b {
-    color: #2686A6;
-}
+        .text-loan b {
+            color: #2686A6;
+        }
 
-.btn-danger {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
 
-.btn-danger:hover {
-    background: #bb2d3b;
-}
+    .btn-danger:hover {
+        background: #bb2d3b;
+    }
+
+    .btn-container {
+        margin: 10px;
+    }

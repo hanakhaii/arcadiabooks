@@ -13,15 +13,15 @@
             <h1>Arcadia Library</h1>
 
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Explore</a></li>
+                <li><a href="#home" class="btn-nav">Home</a></li>
+                <li><a href="#about" class="btn-nav">About</a></li>
+                <li><a href="#explore" class="btn-nav">Explore</a></li>
             </ul>
 
             <a class="login" href="../back-end/login.php">Login</a>
         </nav>
 
-        <section class="sec1">
+        <section class="sec1" id="home">
             <div class="judul">
                 <h1>access all <br> books <br> <span>instantly</span>.</h1>
                 <p>Take a look at some <br> interesting stories and learn <br> something new</p>
@@ -33,7 +33,7 @@
             </div>
         </section>
 
-        <section class="sec2">
+        <section class="sec2" id="about">
             <div class="about">
                 <center>
                     <h1>About Arcadia Library</h1>
@@ -64,7 +64,7 @@
             </div>
         </section>
 
-        <section class="sec3">
+        <section class="sec3" id="explore">
             <center>
                 <h1>Explore</h1>
             </center>
@@ -86,14 +86,13 @@
 
         <footer>
             <div class="foto">
-                <img src="/img/cwok.png" width="325" alt="" srcset="">
+                <img src="/img/cwok.png" width="400" alt="" srcset="">
             </div>
 
             <div class="bawah">
                 <h1>Find <br> Anybook <br> You Want!</h1>
                 <p>Just one touch!</p>
-                <a href="">Join Now</a> <br>
-                <label for="">© 2025, Yumebook. All rights reserved.</label>
+                <p style="margin-top: 30px;">© 2025, Yumebook. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -115,7 +114,7 @@
 
     .kurung {
         background-color: #2686a648;
-        padding: 50px 20px 20px 50px;
+        padding: 50px 20px 0 50px;
         border-radius: 15px;
     }
 
@@ -128,13 +127,24 @@
     ul {
         list-style: none;
         display: flex;
-
     }
 
     ul li a {
         padding: 10px 20px;
         color: black;
-        /* font-weight: bold; */
+        justify-content: space-around;
+        margin-right: 30px;
+    }
+
+    a {
+        transition: 0.3s ease-in-out;
+    }
+
+    a:hover {
+        transition: 0.3s ease-in-out;
+        background-color: #9BC8D7;
+        color: white;
+        border-radius: 10px;
     }
 
     .login {
@@ -142,6 +152,10 @@
         border-radius: 5px;
         padding: 10px 20px;
         color: white;
+    }
+
+    .login:hover {
+        background-color:#87b9cb;
     }
 
     /*bagian section 1*/
@@ -181,6 +195,10 @@
         /* margin-top: 80px; */
     }
 
+    .judul a:hover {
+        background-color: #87b9cb;
+    }
+
     /* section 2 */
     .sec2 {
         background-color: #2686A6;
@@ -193,6 +211,7 @@
 
     .about h1 {
         font-size: 50px;
+        color: #F0F0F0;
         padding-bottom: 40px;
     }
 
@@ -202,6 +221,7 @@
 
     .about p {
         width: 600px;
+        color: #F0F0F0;
         font-size: 18px;
     }
 
@@ -229,55 +249,55 @@
     }
 
     /* section 3 */
-.sec3 {
-    padding: 60px 20px;
-    margin-top: 50px;
-}
+    .sec3 {
+        padding: 60px 20px;
+        margin-top: 50px;
+    }
 
-.sec3 h1 {
-    font-size: 40px;
-    margin-bottom: 40px;
-}
+    .sec3 h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
 
-.pilihan-buku {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
+    .pilihan-buku {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
 
-.buku-item {
-    width: 280px;
-    text-align: center;
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
+    .buku-item {
+        width: 280px;
+        text-align: center;
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
 
-.buku-item:hover {
-    transform: translateY(-10px);
-}
+    .buku-item:hover {
+        transform: translateY(-10px);
+    }
 
-.buku-item img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
+    .buku-item img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
 
-.buku-item h1 {
-    font-size: 1.2rem;
-    color: #2686A6;
-    margin: 0;
-}
+    .buku-item h1 {
+        font-size: 1.2rem;
+        color: #2686A6;
+        margin: 0;
+    }
 
     /* footer */
     footer {
         display: flex;
-        align-items: center;
+        flex-direction: row;
     }
 
     .pilihan-buku {
@@ -288,8 +308,45 @@
 
     .bawah {
         background-color: #F0F0F0;
-        padding: 40px 40px;
+        padding: 30px 150px;
+        margin-top: 30px;
+        margin-bottom: 50px;
+        translate: -50px;
+        border-radius: 20px;
     }
+
+    .bawah h1 {
+        margin-top: 50px;
+    }
+
+    .bawah p {
+        margin-top: 10px;
+    }
+
+    .foto {
+        z-index: 2;
+        translate: 80px;
+    }
+
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const links = document.querySelectorAll("nav ul li a[href^='#']");
+        links.forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 </html>
