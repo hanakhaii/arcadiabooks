@@ -1,7 +1,7 @@
 <?php
 include_once '../db.php';
 $perpus = new database();
-$writer = $perpus->getWriter();
+$writer = $perpus->getWriters();
 ?>
 
 <!DOCTYPE html>

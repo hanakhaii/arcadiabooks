@@ -33,18 +33,30 @@ class database
     function books($keyword = '')
     {
         $keyword = mysqli_real_escape_string($this->conn, $keyword);
-        if ($keyword == '') {
-            $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
-                FROM book
-                JOIN writer ON book.writer_id = writer.writer_id
-                JOIN category ON book.category_id = category.category_id";
-        } else {
-            $sql = "SELECT book.title, book.cover, writer.name AS writer, category.category_name AS category, book.publication_year AS publication_year
-                FROM book
-                JOIN writer ON book.writer_id = writer.writer_id
-                JOIN category ON book.category_id = category.category_id
-                WHERE book.title LIKE '%$keyword%' OR writer.name LIKE '%$keyword%'";
-        }
+    if ($keyword == '') {
+        $sql = "SELECT 
+                book.book_id,  
+                book.title, 
+                book.cover, 
+                writer.name AS writer, 
+                category.category_name AS category, 
+                book.publication_year 
+            FROM book
+            JOIN writer ON book.writer_id = writer.writer_id
+            JOIN category ON book.category_id = category.category_id";
+    } else {
+        $sql = "SELECT 
+                book.book_id,  
+                book.title, 
+                book.cover, 
+                writer.name AS writer, 
+                category.category_name AS category, 
+                book.publication_year 
+            FROM book
+            JOIN writer ON book.writer_id = writer.writer_id
+            JOIN category ON book.category_id = category.category_id
+            WHERE book.title LIKE '%$keyword%' OR writer.name LIKE '%$keyword%'";
+    }
         $data = mysqli_query($this->conn, $sql);
         $hasil = [];
         while ($d = mysqli_fetch_array($data)) {
@@ -112,12 +124,17 @@ class database
     }
 
     // Ambil detail buku berdasarkan ID
-    function getBookById($id)
+    // Di dalam class database
+    public function getBookById($id)
     {
         $id = (int)$id;
-        $sql = "SELECT * FROM book WHERE book_id = $id";
-        $data = mysqli_query($this->conn, $sql);
-        return mysqli_fetch_assoc($data);
+        $sql = "SELECT book.*, writer.name AS writer_name, category.category_name 
+            FROM book 
+            JOIN writer ON book.writer_id = writer.writer_id 
+            JOIN category ON book.category_id = category.category_id 
+            WHERE book.book_id = $id";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
     }
 
     // Update buku
@@ -155,19 +172,20 @@ class database
         $sql = "DELETE FROM category WHERE category_id = $id";
         return mysqli_query($this->conn, $sql);
     }
-    public function deleteBook($id) {
-    $id = (int)$id;
-    
-    // Cek apakah buku sedang dipinjam (memiliki relasi di tabel loan_time)
-    $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id");
-    if (mysqli_num_rows($check) > 0) {
-        return false; // Buku tidak bisa dihapus karena masih dipinjam
+    public function deleteBook($id)
+    {
+        $id = (int)$id;
+
+        // Cek apakah buku sedang dipinjam (memiliki relasi di tabel loan_time)
+        $check = mysqli_query($this->conn, "SELECT * FROM loan_time WHERE book_id = $id");
+        if (mysqli_num_rows($check) > 0) {
+            return false; // Buku tidak bisa dihapus karena masih dipinjam
+        }
+
+        // Jika tidak ada relasi, hapus buku
+        $sql = "DELETE FROM book WHERE book_id = $id";
+        return mysqli_query($this->conn, $sql);
     }
-    
-    // Jika tidak ada relasi, hapus buku
-    $sql = "DELETE FROM book WHERE book_id = $id";
-    return mysqli_query($this->conn, $sql);
-}
 
 
     // Tambahkan method berikut di dalam class database
@@ -187,7 +205,7 @@ class database
     }
 
 
-    public function getCategoryById($id)
+    function getCategoryById($id)
     {
         $id = (int)$id;
         $sql = "SELECT * FROM category WHERE category_id = $id";
@@ -259,8 +277,6 @@ class database
         return $hasil;
     }
 
-
-
     function getUsers()
     {
         $data = mysqli_query($this->conn, "SELECT * FROM user");
@@ -311,17 +327,30 @@ class database
         return $hasil;
     }
 
-    public function getWriter()
-    {
-        $data = mysqli_query($this->conn, "SELECT * FROM writer");
-        $hasil = [];
-        while ($d = mysqli_fetch_array($data)) {
-            $hasil[] = $d;
+    function deleteLoanTime($loan_id){
+        // Ambil data dulu: status & book_id
+        $query = mysqli_query($this->conn, "SELECT status, book_id FROM loan_time WHERE loan_id = '$loan_id'");
+        $loan = mysqli_fetch_assoc($query);
+
+        // Jika status belum "dikembalikan", berarti buku masih dipinjam, jadi stok harus ditambah
+        if ($loan && $loan['status'] != 'dikembalikan') {
+            $book_id = $loan['book_id'];
+            mysqli_query($this->conn, "UPDATE book SET copy = copy + 1 WHERE book_id = '$book_id'");
         }
-        return $hasil;
+
+        // Hapus data peminjaman
+        return mysqli_query($this->conn , "DELETE FROM loan_time WHERE loan_id = '$loan_id'");
     }
 
-    public function createWriter($name, $bio) 
+    function getWriterById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT * FROM writer WHERE writer_id = $id";
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+
+    public function createWriter($name, $bio)
     {
         $name = mysqli_real_escape_string($this->conn, $name);
         $bio  = mysqli_real_escape_string($this->conn, $bio);
@@ -350,30 +379,7 @@ class database
         return mysqli_query($this->conn, $sql);
     }
 
-    public function getWriterById($id)
-    {
-        $id    = (int)$id;
-        $sql   = "SELECT * FROM writer WHERE writer_id = $id";
-        $result = mysqli_query($this->conn, $sql);
-        return mysqli_fetch_assoc($result);
-    }
     
-    function deleteLoanTime($loan_id){
-        // Ambil data dulu: status & book_id
-        $query = mysqli_query($this->conn, "SELECT status, book_id FROM loan_time WHERE loan_id = '$loan_id'");
-        $loan = mysqli_fetch_assoc($query);
-
-        // Jika status belum "dikembalikan", berarti buku masih dipinjam, jadi stok harus ditambah
-        if ($loan && $loan['status'] != 'dikembalikan') {
-            $book_id = $loan['book_id'];
-            mysqli_query($this->conn, "UPDATE book SET copy = copy + 1 WHERE book_id = '$book_id'");
-        }
-
-        // Hapus data peminjaman
-        return mysqli_query($this->conn , "DELETE FROM loan_time WHERE loan_id = '$loan_id'");
-    }
-
-
 }
 
 $perpus = new database();
