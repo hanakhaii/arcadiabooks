@@ -102,7 +102,7 @@ $total_user = $data_user['total_peminjam'];
         <main class="main_dashboard">
             <!-- header, sapaan awal untuk Admin -->
             <header>
-                <h1>Hello <span style="color: #2686A6;">Admin</span>,</h1>
+                <h1>Hello <span style="color: #2686A6;"><?php echo htmlspecialchars($_SESSION['username']); ?></span>,</h1>
                 <h3>Welcome to Dashboard!</h3>
                 <p style="color: #0f5065;">To get started, please select the menu on the left side.</p>
             </header>
@@ -114,12 +114,12 @@ $total_user = $data_user['total_peminjam'];
             <!-- section panduan Admin -->
             <section class="as_admin">
                 <h2>Top #3 Most Frequently Borrowed Book</h2>
+                <div class="container-admin">
                 <?php 
                 $no = 1 ;
                 foreach($perpus->topBooks() as $topthree){
                     
                     ?>
-                <div class="container-admin">
                     <div style="margin-top: 10px;">
                         <h2>#<?= $no++ ?></h2>
                        <img src="../../back-end/uploads/<?= $topthree['cover'] ?>" alt="cover">
@@ -130,8 +130,8 @@ $total_user = $data_user['total_peminjam'];
                             <p><?= $topthree['writer'] ?></p>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
-                <?php } ?>
             </section>
 
             <section class="grid">
